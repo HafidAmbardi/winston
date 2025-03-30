@@ -1,7 +1,8 @@
 "use client";
-
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Layers,
   Book,
@@ -16,6 +17,32 @@ import {
 
 export default function WinstonSidebar() {
   const [activeItem, setActiveItem] = useState("home");
+  const pathname = usePathname();
+
+  // Synchronize active state with current path
+  useEffect(() => {
+    if (pathname === "/") {
+      setActiveItem("home");
+    } else if (pathname.startsWith("/winston-ai")) {
+      setActiveItem("winston-ai");
+    } else if (pathname.startsWith("/informasi")) {
+      setActiveItem("informasi");
+    } else if (pathname.startsWith("/membaca")) {
+      setActiveItem("membaca");
+    } else if (pathname.startsWith("/matematika")) {
+      setActiveItem("belajar-matematika");
+    } else if (pathname.startsWith("/menulis")) {
+      setActiveItem("menulis");
+    } else if (pathname.startsWith("/berpikir-kritis")) {
+      setActiveItem("berpikir-kritis");
+    } else if (pathname.startsWith("/referensi")) {
+      setActiveItem("referensi-materi");
+    } else if (pathname.startsWith("/help")) {
+      setActiveItem("help");
+    } else if (pathname.startsWith("/settings")) {
+      setActiveItem("setting");
+    }
+  }, [pathname]);
 
   return (
     <div className="flex flex-col h-screen w-64 bg-[#fdf6ed] border-r border-[#e8e0d5]">
@@ -23,27 +50,13 @@ export default function WinstonSidebar() {
       <div className="p-4 border-b border-[#e8e0d5]">
         <div className="flex items-center gap-2">
           <div className="text-[#f0a030] font-bold">
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 36 36"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4Z"
-                stroke="#f0a030"
-                strokeWidth="3"
-                fill="none"
-              />
-              <path
-                d="M10 18C10 14 13 10 18 10C23 10 26 14 26 18"
-                stroke="#f0a030"
-                strokeWidth="3"
-                fill="none"
-                strokeLinecap="round"
-              />
-            </svg>
+            <Image
+              src="/winston_logo.png"
+              alt="Winston logo"
+              width={50}
+              height={50}
+              className="object-cover"
+            />
           </div>
           <span className="text-xl font-bold">Winston</span>
         </div>
@@ -55,7 +68,7 @@ export default function WinstonSidebar() {
           <p className="text-sm font-medium mb-2">Menu</p>
           <nav className="space-y-1">
             <Link
-              href="#"
+              href="/"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "home"
                   ? "bg-[#e09422] text-white"
@@ -68,7 +81,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/winston-ai/"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "winston-ai"
                   ? "bg-[#e09422] text-white"
@@ -77,27 +90,13 @@ export default function WinstonSidebar() {
               onClick={() => setActiveItem("winston-ai")}
             >
               <div className="w-5 h-5 flex items-center justify-center">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 36 36"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4Z"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    fill="none"
-                  />
-                  <path
-                    d="M10 18C10 14 13 10 18 10C23 10 26 14 26 18"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <Image
+                  src="/winston_logo_mono.png"
+                  alt="Winston logo"
+                  width={36}
+                  height={36}
+                  className="object-cover"
+                />
               </div>
               <span>Winston AI</span>
             </Link>

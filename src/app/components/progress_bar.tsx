@@ -58,7 +58,7 @@ export default function ProgressBar({
       </div>
 
       {/* Bottom Labels */}
-      <div className="flex justify-between mt-1 text-sm">
+      <div className="flex justify-between mt-4 text-sm">
         {showFraction && (
           <div className="text-gray-600">
             {completedSteps}/{totalSteps}
