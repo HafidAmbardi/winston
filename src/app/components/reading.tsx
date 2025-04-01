@@ -10,7 +10,7 @@ const ReadingSection = () => {
       </div>
       <div className="flex justify-center mt-6">
         <img 
-          src="" 
+          src="/reading_image.png" 
           alt="Reading Section" 
           className="w-[435px] h-[199px] rounded-md"/>
       </div>
