@@ -39,15 +39,25 @@ export default function FlashCard({
       <div className="mt-4">
         <p className="text-black font-medium">Bagaimana pengerjaanmu?</p>
         <div className="flex gap-4 mt-2">
-          <button className="p-2 bg-yellow-400 rounded-full shadow">
-            <Check size={20} color="black" />
-          </button>
-          <button className="p-2 bg-red-400 rounded-full shadow">
-            <X size={20} color="black" />
-          </button>
-          <button className="p-2 bg-yellow-600 rounded-full shadow">
-            <Flag size={20} color="black" />
-          </button>
+
+          <!-- Button with check -->
+          <button class="p-2 bg-yellow-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center" >
+<img src="/path-to-icons/check.png" alt="Check Icon" class="w-4 h-4" />
+</button>
+
+<!-- Button with No (Wrong) Icon -->
+<button
+class="p-2 bg-red-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
+>
+<img src="/path-to-icons/no(wrong).png" alt="Wrong Icon" class="w-4 h-4" />
+</button>
+
+<!-- Button with Flag Icon -->
+<button
+class="p-2 bg-yellow-600 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
+>
+<img src="/path-to-icons/flag.png" alt="Flag Icon" class="w-4 h-4" />
+</button>
         </div>
       </div>
 
