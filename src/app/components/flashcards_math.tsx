@@ -54,6 +54,11 @@ class="p-2 bg-red-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2
 <img src="/path-to-icons/no(wrong).png" alt="Wrong Icon" class="w-4 h-4" />
 </button>
 
+<div class="flex items-end justify-start gap-2">
+  <div class="w-8 h-0 transform rotate-90 origin-top-left border border-black border-opacity-100 outline-offset-[-0.5px]"></div>
+</div>
+
+
 <!-- Button with Flag Icon -->
 <button
 class="p-2 bg-yellow-600 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
