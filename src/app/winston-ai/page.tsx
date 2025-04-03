@@ -1,16 +1,29 @@
 "use client";
 
+import { useState } from "react";
 import WinstonSidebar from "@/app/components/sidebar";
 import WinstonHeader from "@/app/components/header";
+import PromptInput from "@/app/components/prompt_input";
+import PremiumBanner from "@/app/components/premium_banner";
 import { useChat } from "@/app/components/useChat";
 
 export default function Dashboard() {
   const { prompt, setPrompt, response, isLoading, error, sendMessage } =
     useChat();
+  const [activeOption, setActiveOption] = useState<
+    "audio" | "text" | "study" | null
+  >(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Handle prompt submission from the PromptInput component
+  const handlePromptSubmit = (inputPrompt: string) => {
+    setPrompt(inputPrompt);
     sendMessage();
+  };
+
+  // Handle premium button click
+  const handlePremiumClick = () => {
+    console.log("Premium subscription clicked");
+    // Add your premium subscription logic here
   };
 
   return (
@@ -24,35 +37,21 @@ export default function Dashboard() {
 
         {/* Page Content */}
         <main className="flex-1 overflow-auto p-6">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-2xl font-bold mb-6">
-              Apa informasi yang ingin kamu cari?
-            </h1>
+          <div className="max-w-4xl mx-auto space-y-6">
+            {/* Prompt Input Component */}
+            <PromptInput
+              title="Apa informasi yang ingin kamu cari?"
+              subtitle="Tulis prompt kamu di bawah ini untuk mempersonalisasikan jawabanmu!"
+              placeholder="Tulis pernyataanmu......"
+              onSubmit={handlePromptSubmit}
+            />
 
-            {/* Chat form */}
-            <form onSubmit={handleSubmit} className="mb-6">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder="Ask Winston anything..."
-                  className="flex-1 px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  disabled={isLoading}
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading || !prompt.trim()}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 disabled:opacity-50"
-                >
-                  {isLoading ? "Thinking..." : "Ask"}
-                </button>
-              </div>
-            </form>
+            {/* Premium Banner */}
+            <PremiumBanner onButtonClick={handlePremiumClick} />
 
             {/* Error message */}
             {error && (
-              <div className="p-4 mb-6 bg-red-50 text-red-700 rounded-lg">
+              <div className="p-4 bg-red-50 text-red-700 rounded-lg">
                 {error}
               </div>
             )}
@@ -60,7 +59,7 @@ export default function Dashboard() {
             {/* Loading indicator */}
             {isLoading && (
               <div className="flex justify-center my-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>
               </div>
             )}
 
@@ -70,7 +69,7 @@ export default function Dashboard() {
                 <h2 className="text-sm font-semibold mb-2 text-gray-500">
                   Winston AI
                 </h2>
-                <div className="prose">{response}</div>
+                <div className="prose max-w-none">{response}</div>
               </div>
             )}
           </div>

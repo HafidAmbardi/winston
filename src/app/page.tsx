@@ -23,7 +23,7 @@ export default function Dashboard() {
 
       {/* Main Content Area */}
       <div className="flex flex-col flex-1 overflow-hidden">
-        <WinstonHeader />
+        <WinstonHeader userName={userName} />
 
         {/* Page Content */}
         <main className="flex-1 overflow-auto p-6">
@@ -55,9 +55,9 @@ export default function Dashboard() {
               <div className="bg-white rounded-xl shadow-sm">
                 <Leaderboard
                   title="Pencapaian Terbaikmu"
-                  achievements={{
-                    medal: { value: 99.5, percentage: 100 },
-                    chart: { value: 0, percentage: 0 },
+                  achievement={{
+                    value: 99.5,
+                    percentage: 100,
                   }}
                   users={[
                     { rank: 1, name: "23 Maret 2023", score: 90, avatar: "" },

@@ -6,7 +6,8 @@ import {
   MoreHorizontal,
 } from "lucide-react";
 
-interface ExerciseResult {
+// Export this interface so it can be imported elsewhere
+export interface ExerciseResult {
   id: string;
   title: string;
   timestamp: string;
@@ -59,7 +60,7 @@ export default function GradeCard({
 
       {/* Total Score Card */}
       <div className="p-4">
-        <div className="bg-gradient-to-r from-[#C77F00] to-amber-400 rounded-lg p-4 text-white relative">
+        <div className="bg-gradient-to-r from-40% from-[#C77F00] to-[#FFCE84] rounded-3xl p-4 text-white relative">
           <p className="text-sm opacity-90">Total score</p>
           <p className="text-4xl font-bold mt-1">{totalScore}</p>
           <button className="absolute top-4 right-4 text-white">

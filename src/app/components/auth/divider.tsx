@@ -1,0 +1,13 @@
+interface DividerProps {
+  text?: string;
+}
+
+export default function Divider({ text = "or" }: DividerProps) {
+  return (
+    <div className="flex items-center my-6">
+      <div className="flex-1 border-t border-gray-300"></div>
+      <div className="px-4 text-gray-500">{text}</div>
+      <div className="flex-1 border-t border-gray-300"></div>
+    </div>
+  );
+}

@@ -26,9 +26,9 @@ export default function ProgressBar({
   }, [percentage, totalSteps]);
 
   return (
-    <div className="w-full max-w-md mx-auto p-4">
+    <div className="w-full mx-auto p-4">
       {showPercentage && (
-        <div className="text-2xl font-bold mb-2">{percentage}%</div>
+        <div className="text-4xl font-bold mb-6">{percentage}%</div>
       )}
 
       <div className="relative">
@@ -39,26 +39,26 @@ export default function ProgressBar({
             return (
               <div
                 key={index}
-                className={`w-8 h-8 rounded-full ${
+                className={`w-12 h-12 rounded-full ${
                   isCompleted ? "bg-[#f0a030]" : "bg-gray-200"
-                } shadow-sm transition-colors duration-300 -mt-1.5`}
+                } shadow-sm transition-colors duration-300 -mt-2.5`}
               />
             );
           })}
         </div>
 
         {/* Progress Bar Track */}
-        <div className="h-4 bg-gray-200 rounded-full">
+        <div className="h-6 bg-gray-200 rounded-full">
           {/* Progress Bar Fill */}
           <div
-            className="h-4 bg-[#f0a030] rounded-full absolute top-0 left-0 transition-all duration-500 ease-in-out"
+            className="h-6 bg-[#f0a030] rounded-full absolute top-0 left-0 transition-all duration-500 ease-in-out"
             style={{ width: `${percentage}%` }}
           />
         </div>
       </div>
 
       {/* Bottom Labels */}
-      <div className="flex justify-between mt-4 text-sm">
+      <div className="flex justify-between mt-8 text-sm">
         {showFraction && (
           <div className="text-gray-600">
             {completedSteps}/{totalSteps}

@@ -20,8 +20,8 @@ export default function TextButton({
         isActive ? "bg-amber-600 text-white" : "bg-amber-100 text-gray-800"
       }`}
     >
-      <FileText className="w-4 h-4" />
-      <span className="text-sm">{text}</span>
+      <FileText className="w-8 h-8" />
+      <span className="text-xs">{text}</span>
     </button>
   );
 }

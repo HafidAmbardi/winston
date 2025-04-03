@@ -36,12 +36,12 @@ export default function QuizList({
           <div key={quiz.id}>
             <div className="flex items-center justify-between p-4">
               <div>
-                <h4 className="font-medium">{quiz.title}</h4>
+                <h4 className="font-bold">{quiz.title}</h4>
                 <p className="text-sm text-gray-500 mt-1">{quiz.description}</p>
               </div>
               <button
                 onClick={() => onSelectQuiz(quiz.id)}
-                className="w-10 h-10 bg-[#C77F00] rounded flex items-center justify-center text-white"
+                className="w-8 h-8 bg-[#C77F00] rounded flex items-center justify-center text-white"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

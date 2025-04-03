@@ -3,7 +3,13 @@
 import { Bell, Search } from "lucide-react";
 import Image from "next/image";
 
-export default function WinstonHeader() {
+interface WinstonHeaderProps {
+  userName?: string;
+}
+
+export default function WinstonHeader({
+  userName = "User",
+}: WinstonHeaderProps) {
   return (
     <header className="h-16 bg-[#fdf6ed] border-b border-[#e8e0d5] flex items-center justify-between px-6">
       {/* Dashboard Title */}
@@ -32,7 +38,7 @@ export default function WinstonHeader() {
               className="object-cover"
             />
           </div>
-          <span className="text-sm font-medium">Daniel Mandela Tulung</span>
+          <span className="text-sm font-medium">{userName}</span>
         </div>
       </div>
     </header>

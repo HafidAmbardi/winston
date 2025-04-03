@@ -3,7 +3,9 @@ import MaterialItem, {
   type MaterialStatus,
 } from "@/app/components/material_item";
 
-interface Material {
+// Export these interfaces so they can be imported elsewhere
+export type { MaterialStatus } from "@/app/components/material_item"; // Re-export from source
+export interface Material {
   id: string;
   title: string;
   status: MaterialStatus;

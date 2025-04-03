@@ -1,30 +1,22 @@
 "use client";
 
-import { Medal, BarChart3 } from "lucide-react";
+import { Medal } from "lucide-react";
 
 interface AchievementProps {
   value: number;
   percentage: number;
-  icon: "medal" | "chart";
 }
 
-function Achievement({ value, percentage, icon }: AchievementProps) {
-  const iconColor = icon === "medal" ? "text-amber-500" : "text-emerald-500";
-  const bgColor = icon === "medal" ? "bg-amber-500/10" : "bg-emerald-500/10";
-
+function Achievement({ value }: AchievementProps) {
   return (
     <div className="flex items-start gap-3">
-      <div className={`p-2 rounded-full ${bgColor}`}>
-        {icon === "medal" ? (
-          <Medal className={`w-6 h-6 ${iconColor}`} />
-        ) : (
-          <BarChart3 className={`w-6 h-6 ${iconColor}`} />
-        )}
+      <div className="p-2 rounded-full bg-amber-500/10">
+        <Medal className="w-6 h-6 text-amber-500" />
       </div>
       <div>
-        <div className="text-2xl font-bold">{value}</div>
-        <div className={`text-sm ${iconColor}`}>
-          {percentage.toFixed(2)}% da Meta
+        <div className="text-2xl font-bold">{value}/100</div>
+        <div className="text-sm text-amber-500">
+          Nilai terbaikmu sejauh ini!
         </div>
       </div>
     </div>
@@ -40,19 +32,16 @@ interface LeaderboardUser {
 
 interface LeaderboardProps {
   title?: string;
-  achievements?: {
-    medal: { value: number; percentage: number };
-    chart: { value: number; percentage: number };
+  achievement?: {
+    value: number;
+    percentage: number;
   };
   users?: LeaderboardUser[];
 }
 
 export default function Leaderboard({
   title = "Pencapaian Terbaikmu",
-  achievements = {
-    medal: { value: 13, percentage: 109.72 },
-    chart: { value: 13, percentage: 109.72 },
-  },
+  achievement = { value: 13, percentage: 109.72 },
   users = [
     { rank: 1, name: "Rafael Pereira", score: 20, avatar: "" },
     { rank: 2, name: "Rafael Pereira", score: 20, avatar: "" },
@@ -65,16 +54,10 @@ export default function Leaderboard({
       <div className="p-4 border-b">
         <h3 className="text-lg font-medium">{title}</h3>
       </div>
-      <div className="p-6 grid grid-cols-2 gap-6">
+      <div className="p-6">
         <Achievement
-          value={achievements.medal.value}
-          percentage={achievements.medal.percentage}
-          icon="medal"
-        />
-        <Achievement
-          value={achievements.chart.value}
-          percentage={achievements.chart.percentage}
-          icon="chart"
+          value={achievement.value}
+          percentage={achievement.percentage}
         />
       </div>
 
@@ -86,10 +69,7 @@ export default function Leaderboard({
               <span className="w-6 text-gray-500 font-medium">{user.rank}</span>
               <div className="w-8 h-8 bg-gray-200 rounded-full flex-shrink-0"></div>
               <span className="ml-3 flex-grow font-medium">{user.name}</span>
-              <span className="text-purple-600 font-bold text-xs">
-                {user.score}
-                <span className="block text-center text-xs">0</span>
-              </span>
+              <span className="text-purple-600 font-bold">{user.score}</span>
             </div>
           </div>
         ))}

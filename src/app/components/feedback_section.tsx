@@ -34,13 +34,13 @@ export default function FeedbackSection({
     <div className="mt-4">
       <div className="flex items-center gap-2 mb-2">
         {type === "weakness" ? (
-          <XCircle className="w-5 h-5 text-amber-500" />
+          <XCircle className="w-5 h-5 text-[#912018]" />
         ) : (
-          <CheckCircle className="w-5 h-5 text-green-500" />
+          <CheckCircle className="w-5 h-5 text-[#095C37]" />
         )}
         <span
           className={`font-medium ${
-            type === "weakness" ? "text-amber-500" : "text-green-500"
+            type === "weakness" ? "text-[#912018]" : "text-[#095C37]"
           }`}
         >
           {title}
