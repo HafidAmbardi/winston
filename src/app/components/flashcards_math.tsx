@@ -7,7 +7,7 @@ interface FlashCardProps {
   latexExpression: string;
 }
 
-export default function FlashCard({
+export default function FlashCardMath({
   questionNumber,
   marks,
   question,
@@ -17,8 +17,10 @@ export default function FlashCard({
     <div className="w-full p-4 bg-[#FEF1D5] border border-gray-500 rounded-lg shadow-sm">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-[#FFC052] rounded-full flex 
-          items-center justify-center text-black font-medium">
+          <div
+            className="w-10 h-10 bg-[#FFC052] rounded-full flex 
+          items-center justify-center text-black font-medium"
+          >
             {questionNumber}
           </div>
         </div>

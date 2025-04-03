@@ -15,6 +15,7 @@ interface PromptInputProps {
   initialValue?: string;
   onSubmit?: (prompt: string) => void;
   onOptionChange?: (option: "audio" | "text" | "study" | null) => void;
+  showButtons?: boolean; // New prop to control button visibility
 }
 
 export default function PromptInput({
@@ -24,6 +25,7 @@ export default function PromptInput({
   initialValue = "",
   onSubmit = (prompt) => console.log("Submitted prompt:", prompt),
   onOptionChange,
+  showButtons = true, // Default to showing buttons
 }: PromptInputProps) {
   const [prompt, setPrompt] = useState(initialValue);
   const [activeButton, setActiveButton] = useState<
@@ -74,22 +76,24 @@ export default function PromptInput({
         </div>
       </form>
 
-      <div className="flex flex-wrap gap-3 justify-center">
-        <AudioButton
-          isActive={activeButton === "audio"}
-          onClick={() => handleButtonClick("audio")}
-        />
+      {showButtons && (
+        <div className="flex flex-wrap gap-3 justify-center">
+          <AudioButton
+            isActive={activeButton === "audio"}
+            onClick={() => handleButtonClick("audio")}
+          />
 
-        <TextButton
-          isActive={activeButton === "text"}
-          onClick={() => handleButtonClick("text")}
-        />
+          <TextButton
+            isActive={activeButton === "text"}
+            onClick={() => handleButtonClick("text")}
+          />
 
-        <StudyPlanButton
-          isActive={activeButton === "study"}
-          onClick={() => handleButtonClick("study")}
-        />
-      </div>
+          <StudyPlanButton
+            isActive={activeButton === "study"}
+            onClick={() => handleButtonClick("study")}
+          />
+        </div>
+      )}
     </div>
   );
 }

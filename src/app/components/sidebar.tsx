@@ -102,7 +102,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/informasi/"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "informasi"
                   ? "bg-[#e09422] text-white"
