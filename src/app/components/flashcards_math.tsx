@@ -33,7 +33,7 @@ export default function FlashCard({
       <div className="text-black font-medium mb-4">{question}</div>
 
       <div className="flex justify-center bg-white p-4 rounded-md shadow">
-        <p className="text-lg font-serif">{latexExpression}</p>
+      <img class="w-[322px] h-[92px] relative" src="https://placehold.co/322x92" alt="Soal" />
       </div>
 
       <div className="mt-4">
