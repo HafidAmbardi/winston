@@ -20,10 +20,15 @@ export default function FlashCardMath({
           <div
             className="w-10 h-10 bg-[#FFC052] rounded-full flex 
           items-center justify-center text-black font-medium"
-          >
+>
             {questionNumber}
           </div>
         </div>
+        <div class="flex items-end justify-start gap-2">
+  <img src="/path-to-icons/calculator.png" alt="calcultir Icon" class="w-4 h-4" />></img>
+  <div class="flex items-end justify-start gap-2">
+  <div class="w-8 h-0 transform rotate-90 origin-top-left border border-black border-opacity-100 outline-offset-[-0.5px]"></div>
+</div>
         <div className="flex items-center gap-2 text-black font-medium">
           <Flag size={20} />
           <span>{marks} marks</span>
