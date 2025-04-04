@@ -228,78 +228,36 @@
                   <p class="text-black font-medium">Bagaimana pengerjaanmu?</p>
                   <div class="flex gap-4 mt-2">
                     <!-- First Ellipse -->
-                  <!-- Button with Check Icon -->
-<button
-class="p-2 bg-yellow-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
->
-<img src="/path-to-icons/check.png" alt="Check Icon" class="w-4 h-4" />
-</button>
+                 <!-- Button with Check Icon -->
+      <button
+        class="p-2 bg-yellow-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
+      >
+        <img src="/path-to-icons/check.png" alt="Check Icon" class="w-4 h-4" />
+      </button>
 
-<!-- Button with No (Wrong) Icon -->
-<button
-class="p-2 bg-red-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
->
-<img src="/path-to-icons/no(wrong).png" alt="Wrong Icon" class="w-4 h-4" />
-</button>
+      <!-- Button with No (Wrong) Icon -->
+      <button
+        class="p-2 bg-red-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
+      >
+        <img src="/path-to-icons/no(wrong).png" alt="Wrong Icon" class="w-4 h-4" />
+      </button>
 
-<!-- Button with Flag Icon -->
-<button
-class="p-2 bg-yellow-600 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
->
-<img src="/path-to-icons/flag.png" alt="Flag Icon" class="w-4 h-4" />
-</button>
-              
-                    <!-- Second Ellipse -->
-                    <button
-                      class="p-2 bg-red-400 rounded-full shadow"
-                      style="width: 40px; height: 40px; border-radius: 9999px; border: 0.50px #EEF2F6 solid;"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-              
-                    <!-- Third Ellipse (Flag Icon) -->
-                    <button
-                      class="p-2 bg-yellow-600 rounded-full shadow"
-                      style="width: 40px; height: 40px; border-radius: 9999px; border: 0.50px #EEF2F6 solid;"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 2v20m10-10H2"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="mt-4 flex justify-end">
-                  <button class="px-4 py-2 bg-[#FFC052] text-black font-medium rounded-md shadow">
-                    Lihat Jawaban
-                  </button>
-                </div>
-              </div>
-         
+      <!-- Button with Flag Icon -->
+      <button
+        class="p-2 bg-yellow-600 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
+      >
+        <img src="/path-to-icons/flag.png" alt="Flag Icon" class="w-4 h-4" />
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-4 flex justify-end">
+    <button class="px-4 py-2 bg-[#FFC052] text-black font-medium rounded-md shadow">
+      Lihat Jawaban
+    </button>
+  </div>
+</div>
+                   
               <div class="mb-6"></div>
               <!-- Flashcard Section -->
          <div class="w-full p-4 bg-[#FEF1D5] border border-gray-500 rounded-lg shadow-sm">
