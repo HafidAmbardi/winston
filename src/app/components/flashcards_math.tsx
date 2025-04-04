@@ -49,25 +49,25 @@ export default function FlashCardMath({
         <p className="text-black font-medium">Bagaimana pengerjaanmu?</p>
         <div className="flex gap-4 mt-2">
 
-           <!-- Button with Check Icon -->
+          <!-- Button with Check Icon -->
       <button
         class="p-2  bg-primary-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center border-opacity-100" style="background-color: #FFC052;"
       >
-        <img src="/path-to-icons/check.png" alt="Check Icon" class="w-4 h-4" />
+        <img src="check.png" alt="Check Icon" class="w-4 h-4" />
       </button>
 
       <!-- Button with No (Wrong) Icon -->
       <button
         class="p-2  bg-primary-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center border-opacity-100" style="background-color: #FFC052;"
       >
-        <img src="/path-to-icons/no(wrong).png" alt="Wrong Icon" class="w-4 h-4" />
+        <img src="no (wrong) .png" alt="Wrong Icon" class="w-4 h-4" />
       </button>
 
       <!-- Button with Flag Icon -->
       <button
         class="p-2  bg-primary-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center border-opacity-100" style="background-color: #FFC052;"
       >
-        <img src="/path-to-icons/flag.png" alt="Flag Icon" class="w-4 h-4" />
+        <img src="flag.png" alt="Flag Icon" class="w-4 h-4" />
       </button>
     </div>
   </div>
