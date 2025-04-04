@@ -49,37 +49,34 @@ export default function FlashCardMath({
         <p className="text-black font-medium">Bagaimana pengerjaanmu?</p>
         <div className="flex gap-4 mt-2">
 
-          <!-- Button with check -->
-          <button class="p-2 bg-yellow-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center" >
-<img src="/path-to-icons/check.png" alt="Check Icon" class="w-4 h-4" />
-</button>
+           <!-- Button with Check Icon -->
+      <button
+        class="p-2  bg-primary-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center border-opacity-100" style="background-color: #FFC052;"
+      >
+        <img src="/path-to-icons/check.png" alt="Check Icon" class="w-4 h-4" />
+      </button>
 
-<!-- Button with No (Wrong) Icon -->
-<button
-class="p-2 bg-red-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
->
-<img src="/path-to-icons/no(wrong).png" alt="Wrong Icon" class="w-4 h-4" />
-</button>
+      <!-- Button with No (Wrong) Icon -->
+      <button
+        class="p-2  bg-primary-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center border-opacity-100" style="background-color: #FFC052;"
+      >
+        <img src="/path-to-icons/no(wrong).png" alt="Wrong Icon" class="w-4 h-4" />
+      </button>
 
-<div class="flex items-end justify-start gap-2">
-  <div class="w-8 h-0 transform rotate-90 origin-top-left border border-black border-opacity-100 outline-offset-[-0.5px]"></div>
-</div>
-
-
-<!-- Button with Flag Icon -->
-<button
-class="p-2 bg-yellow-600 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center"
->
-<img src="/path-to-icons/flag.png" alt="Flag Icon" class="w-4 h-4" />
-</button>
-        </div>
-      </div>
-
-      <div className="mt-4 flex justify-end">
-        <button className="px-4 py-2 bg-[#FFC052] text-black font-medium rounded-md shadow">
-          Lihat Jawaban
-        </button>
-      </div>
+      <!-- Button with Flag Icon -->
+      <button
+        class="p-2  bg-primary-400 rounded-full shadow w-[40px] h-[40px] border border-[#EEF2F6] flex items-center justify-center border-opacity-100" style="background-color: #FFC052;"
+      >
+        <img src="/path-to-icons/flag.png" alt="Flag Icon" class="w-4 h-4" />
+      </button>
     </div>
+  </div>
+
+  <div class="mt-4 flex justify-end">
+    <button class="px-4 py-2 bg-[#FFC052] text-black font-medium rounded-md shadow">
+      Lihat Jawaban
+    </button>
+  </div>
+</div>
   );
 }
