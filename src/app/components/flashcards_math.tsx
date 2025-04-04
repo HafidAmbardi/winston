@@ -43,7 +43,7 @@ export default function FlashCardMath({
       <img class="w-[322px] h-[92px] relative" src="https://placehold.co/322x92" alt="Soal" />
       </div>
 
-     <! in my opinion I think just use image aja deh but custom as of now, soalnya if manually from backend kyk kurang bagus and tktnya ada some equations yg complex and gabisa diconvert with the system wdyt, sbnrny UX speaking gpp text cmn kykk formatnya kyk krng bagus aja -->
+     <!-- in my opinion I think just use image aja deh but custom as of now, soalnya if manually from backend kyk kurang bagus and tktnya ada some equations yg complex and gabisa diconvert with the system wdyt, sbnrny UX speaking gpp text cmn kykk formatnya kyk krng bagus aja -->
 
       <div className="mt-4">
         <p className="text-black font-medium">Bagaimana pengerjaanmu?</p>
