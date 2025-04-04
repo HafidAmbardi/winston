@@ -1,4 +1,4 @@
-import { Check, X, Flag } from "lucide-react";
+ import { Check, X, Flag } from "lucide-react";
 
 interface FlashCardProps {
   questionNumber: string;
