@@ -16,7 +16,7 @@ export default function MaterialSection({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full">
       <div className="border border-[#A36800] rounded-md p-5">
         <ul className="text-black text-sm font-normal leading-[25px]">
           {summaryPoints.map((point, index) => (

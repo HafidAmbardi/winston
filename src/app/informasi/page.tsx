@@ -1,16 +1,111 @@
 "use client";
 
+import { useState } from "react";
 import WinstonSidebar from "@/app/components/sidebar";
 import WinstonHeader from "@/app/components/header";
-import Section from "@/app/components/assesment_test";
-import MaterialSection from "@/app/components/material_section";
-import FlashCardMath from "@/app/components/flashcards_math";
-import FlashCardWrite from "@/app/components/flashcards_write";
-import ReadingSection from "@/app/components/reading";
-import Popup from "@/app/components/popup";
-import { useState } from "react";
-export default function Dashboard() {
-  const [showPopup, setShowPopup] = useState(false);
+import PromptInput from "@/app/components/prompt_input";
+import RegularCourseMaterial from "@/app/components/regular_course_material";
+import PremiumCourseMaterial from "@/app/components/premium_course_material";
+
+// Sample course data
+const premiumCourseMaterials = [
+  {
+    id: "1",
+    title:
+      "Peluang Karir atau Pekerjaan Sebagai Perempuan di Bidang Sains dan Teknologi!",
+    imageSrc: "/learn.jpeg",
+    isFavorite: true,
+  },
+  {
+    id: "2",
+    title:
+      "Peluang Karir atau Pekerjaan Sebagai Perempuan di Bidang Sains dan Teknologi!",
+    imageSrc: "/learn.jpeg",
+    isFavorite: true,
+  },
+];
+
+const regularCourseMaterials = [
+  {
+    id: "3",
+    title: "Peluang Karir atau Pekerjaan Sains dan Tekno!",
+    imageSrc: "/learn.jpeg",
+  },
+  {
+    id: "4",
+    title: "Peluang Karir atau Pekerjaan Sains dan Tekno!",
+    imageSrc: "/learn.jpeg",
+  },
+  {
+    id: "5",
+    title: "Peluang Karir atau Pekerjaan Sains dan Tekno!",
+    imageSrc: "/learn.jpeg",
+  },
+  {
+    id: "6",
+    title: "Peluang Karir atau Pekerjaan Sains dan Tekno!",
+    imageSrc: "/learn.jpeg",
+  },
+  {
+    id: "7",
+    title: "Peluang Karir atau Pekerjaan Sains dan Tekno!",
+    imageSrc: "/learn.jpeg",
+  },
+  {
+    id: "",
+    title: "Peluang Karir atau Pekerjaan Sains dan Tekno!",
+    imageSrc: "/learn.jpeg",
+  },
+];
+
+export default function CoursesPage() {
+  const [premiumMaterials, setPremiumMaterials] = useState(
+    premiumCourseMaterials
+  );
+  const [regularMaterials, setRegularMaterials] = useState(
+    regularCourseMaterials
+  );
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Handle prompt submission
+  const handlePromptSubmit = (prompt: string) => {
+    setSearchQuery(prompt);
+    console.log("Searching for:", prompt);
+    // Here you would typically fetch search results from an API
+  };
+
+  // Toggle favorite status
+  const toggleFavorite = (id: string) => {
+    setPremiumMaterials(
+      premiumMaterials.map((material) =>
+        material.id === id
+          ? { ...material, isFavorite: !material.isFavorite }
+          : material
+      )
+    );
+  };
+
+  // Handle read full text
+  const handleReadFullText = (id: string) => {
+    console.log(`Reading full text for course ${id}`);
+    // Here you would typically navigate to the course detail page
+  };
+
+  // Handle audio select
+  const handleAudioSelect = () => {
+    console.log("Audio option selected");
+    // Implement audio playback logic
+  };
+
+  // Handle text select
+  const handleTextSelect = () => {
+    console.log("Text option selected");
+    // Implement text view logic
+  };
+
+  // Split regular materials into rows
+  const firstRowRegular = regularMaterials.slice(0, 3);
+  const secondRowRegular = regularMaterials.slice(3, 6);
 
   return (
     <div className="flex h-screen">
@@ -23,88 +118,80 @@ export default function Dashboard() {
 
         {/* Page Content */}
         <main className="flex-1 overflow-auto p-6">
-          <Section
-            title="How comfortable are you with basic mathematics?"
-            name="math-comfort"
-            options={[
-              { value: "beginner", label: "Beginner" },
-              { value: "intermediate", label: "Intermediate" },
-              { value: "advanced", label: "Advanced" },
-            ]}
-          />
-          <MaterialSection
-            summaryPoints={[
-              "Integrasi merupakan kebalikan dari diferensiasi",
-              "Integrasi disebut sebagai antidiferensiasi",
-              "Hasil integrasi disebut sebagai antiturunan",
-            ]}
-            detailedExplanation={
-              <div>
-                <p className="mb-3">
-                  Integral adalah salah satu konsep dasar dalam kalkulus yang
-                  merupakan kebalikan dari diferensial. Jika diferensial
-                  berfokus pada menghitung laju perubahan suatu fungsi, integral
-                  berfokus pada menghitung luas di bawah kurva atau
-                  mengakumulasi nilai-nilai.
-                </p>
-
-                <h3 className="font-semibold mt-4 mb-2">Rumus Dasar</h3>
-                <p className="mb-2">
-                  {"Jika F'(x) = f(x), maka ∫f(x)dx = F(x) + C"}
-                </p>
-
-                <h3 className="font-semibold mt-4 mb-2">Contoh</h3>
-                <p>
-                  Integral dari f(x) = 2x adalah F(x) = x² + C, karena turunan
-                  dari x² adalah 2x.
-                </p>
-
-                <h3 className="font-semibold mt-4 mb-2">Aplikasi</h3>
-                <ul className="list-disc pl-5">
-                  <li>Menghitung luas di bawah kurva</li>
-                  <li>Menghitung volume benda putar</li>
-                  <li>Menyelesaikan persamaan diferensial</li>
-                </ul>
-              </div>
-            }
-          />
-          <FlashCardMath
-            questionNumber="1"
-            marks={5}
-            question="Hitunglah integral berikut:"
-            latexExpression="∫ 2x dx"
-          />
-          <FlashCardWrite
-            questionNumber="2b"
-            marks={3}
-            question="Bagaimana cara efektif untuk mengelola waktu ketika mengerjakan multiple projects?"
-            explanation="Pembahasan: Prioritaskan tugas berdasarkan tingkat urgensi dan kepentingan. Gunakan teknik time-blocking dan delegasikan tugas bila memungkinkan."
-          />
-          <ReadingSection />
-
-          <button
-            onClick={() => setShowPopup(true)}
-            className="px-4 py-2 bg-[#BD7800] text-white rounded-md"
-          >
-            Open Audio Popup
-          </button>
-
-          {showPopup && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-              <Popup
-                onClose={() => setShowPopup(false)}
-                onAction={() => {
-                  console.log("Action clicked");
-                  setShowPopup(false);
-                  // Navigate or perform other actions
-                }}
-                title="Apakah kamu lebih suka belajar dengan audio?"
-                subtitle="Personalisasi Pengalaman"
-                description="Pilih metode pembelajaran yang paling sesuai dengan gayamu untuk hasil terbaik."
-                actionText="Mulai Belajar"
+          <div className="max-w-6xl mx-auto">
+            {/* Prompt Input */}
+            <div className="mb-8 w-1/2 mx-auto">
+              <PromptInput
+                showButtons={false}
+                title="Apa informasi yang ingin kamu cari?"
+                subtitle="Tulis prompt kamu di bawah ini untuk mempersonalisasikan jawabanmu!"
+                placeholder="Tulis pernyataanmu......"
+                onSubmit={handlePromptSubmit}
               />
             </div>
-          )}
+
+            {/* Course Materials Section */}
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold mb-6">
+                Top rekomendasi info untukmu!
+              </h2>
+
+              {/* Premium Course Materials - Always exactly 2 in the first row */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                {premiumMaterials.slice(0, 2).map((material) => (
+                  <div key={material.id}>
+                    <PremiumCourseMaterial
+                      id={material.id}
+                      title={material.title}
+                      imageSrc={material.imageSrc}
+                      isFavorite={material.isFavorite}
+                      onToggleFavorite={toggleFavorite}
+                      onReadFullText={handleReadFullText}
+                      onAudioSelect={handleAudioSelect}
+                      onTextSelect={handleTextSelect}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Regular Courses Section */}
+              <div className="mb-6">
+                <h3 className="text-xl font-medium mb-4">
+                  Rekomendasi lainnya untukmu
+                </h3>
+
+                {/* First Row of Regular Courses */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  {firstRowRegular.map((material) => (
+                    <div key={material.id}>
+                      <RegularCourseMaterial
+                        id={material.id}
+                        title={material.title}
+                        imageSrc={material.imageSrc}
+                        onReadFullText={handleReadFullText}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Second Row of Regular Courses */}
+                {secondRowRegular.length > 0 && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {secondRowRegular.map((material) => (
+                      <div key={material.id}>
+                        <RegularCourseMaterial
+                          id={material.id}
+                          title={material.title}
+                          imageSrc={material.imageSrc}
+                          onReadFullText={handleReadFullText}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </div>

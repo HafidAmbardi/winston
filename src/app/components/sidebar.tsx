@@ -128,7 +128,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/matematika"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "belajar-matematika"
                   ? "bg-[#e09422] text-white"
