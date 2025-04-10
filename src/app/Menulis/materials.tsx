@@ -12,14 +12,14 @@ export default function WritingStepsPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Handle prompt submission
+
   const handlePromptSubmit = (prompt: string) => {
     setSearchQuery(prompt);
     console.log("Searching for:", prompt);
-    // Handle search logic here
+
   };
 
-  // Handle actions for sections
+
   const handleReadFullText = (id: string) => {
     console.log(`Reading full text for section ${id}`);
     router.push(`/writing/material?id=${id}`);
@@ -33,7 +33,6 @@ export default function WritingStepsPage() {
     console.log("Text option selected");
   };
 
-  // Sample section data
   const writingSteps = [
     {
       id: 1,
@@ -45,6 +44,7 @@ export default function WritingStepsPage() {
           title: "Lihat & Pahami Gambar",
           description:
             "🔹 Apa yang terlihat? (Orang, tempat, benda, suasana) 🔹 Apa yang terjadi di dalam gambar? (Aksi, ekspresi, situasi) 🔹 Bagaimana warna, bentuk, ukuran, dan posisi objek?",
+          imageSrc: "/public/deskripsigambar_material.png", // Image from public folder
           tips: [
             "✔️ Perhatikan semua bagian gambar, jangan hanya fokus pada satu objek.",
             "✔️ Gunakan pertanyaan 'Siapa? Apa? Di mana? Kapan? Mengapa?' untuk membantu memahami isi gambar.",
@@ -70,17 +70,17 @@ export default function WritingStepsPage() {
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
+     
       <WinstonSidebar />
 
-      {/* Main Content Area */}
+
       <div className="flex flex-col flex-1 overflow-hidden">
         <WinstonHeader />
 
-        {/* Page Content */}
+        
         <main className="flex-1 overflow-auto p-6">
           <div className="max-w-6xl mx-auto">
-            {/* Prompt Input */}
+           
             <div className="mb-8 w-1/2 mx-auto">
               <PromptInput
                 showButtons={false}
@@ -91,7 +91,7 @@ export default function WritingStepsPage() {
               />
             </div>
 
-            {/* Writing Steps Section */}
+
             <h1 className="text-2xl font-bold mb-6">Langkah-Langkah Menulis</h1>
             {writingSteps.map((step) => (
               <MaterialSection
