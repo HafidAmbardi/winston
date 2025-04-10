@@ -79,14 +79,12 @@ export default function ProblemSolvingPage() {
     <div className="flex h-screen">
       <WinstonSidebar />
 
-      {/* Main Content Area */}
       <div className="flex flex-col flex-1 overflow-hidden">
         <WinstonHeader />
 
-        {/* Page Content */}
         <main className="flex-1 overflow-auto p-6">
           <div className="max-w-6xl mx-auto">
-            {/* Prompt Input */}
+
             <div className="mb-8 w-1/2 mx-auto">
               <PromptInput
                 showButtons={false}
