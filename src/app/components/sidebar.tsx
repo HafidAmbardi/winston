@@ -115,7 +115,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/membaca"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "membaca"
                   ? "bg-[#e09422] text-white"

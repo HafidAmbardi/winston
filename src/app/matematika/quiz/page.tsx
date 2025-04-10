@@ -11,13 +11,16 @@ import TextButton from "@/app/components/text_button";
 import StudyPlanButton from "@/app/components/study_plan_button";
 import QuizList from "@/app/components/quiz";
 import FlashCardMath from "@/app/components/flashcards_math";
-import MaterialSection from "@/app/components/material_section";
-import Image from "next/image";
+import InfoBar from "@/app/components/info_bar";
+import DifficultySelector from "@/app/components/difficulty_selector";
 
 export default function IntegralPage() {
   const [activeOption, setActiveOption] = useState<
     "audio" | "text" | "study" | null
   >(null);
+
+  const [difficulty, setDifficulty] = useState("easy");
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Handle audio selection
   const handleAudioSelect = () => {
@@ -47,6 +50,28 @@ export default function IntegralPage() {
     console.log(`Quiz ${quizId} selected`);
   };
 
+  // Handle difficulty change
+  const handleDifficultyChange = (newDifficulty: string) => {
+    setDifficulty(newDifficulty);
+    console.log(`Difficulty changed to: ${newDifficulty}`);
+  };
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    console.log(`Page changed to: ${page}`);
+  };
+
+  // Handle download
+  const handleDownload = () => {
+    console.log("Downloading materials");
+  };
+
+  // Handle answers
+  const handleAnswers = () => {
+    console.log("Showing answers");
+  };
+
   // Quiz data
   const quizzes = [
     { id: "1", title: "Integral Dasar", description: "50 soal tersedia" },
@@ -54,6 +79,28 @@ export default function IntegralPage() {
     { id: "3", title: "Integral Tentu", description: "50 soal tersedia" },
     { id: "4", title: "Integral Tak Tentu", description: "50 soal tersedia" },
     { id: "5", title: "Integral Lanjutan", description: "50 soal tersedia" },
+  ];
+
+  // Flashcard data
+  const flashcards = [
+    {
+      questionNumber: "1",
+      marks: 5,
+      question: "Hitunglah integral berikut:",
+      latexExpression: "∫ x² dx",
+    },
+    {
+      questionNumber: "2",
+      marks: 8,
+      question: "Tentukan integral dari fungsi berikut:",
+      latexExpression: "∫ sin(x) cos(x) dx",
+    },
+    {
+      questionNumber: "3",
+      marks: 10,
+      question: "Carilah nilai dari integral berikut:",
+      latexExpression: "∫ x·e^x dx",
+    },
   ];
 
   return (
@@ -106,86 +153,43 @@ export default function IntegralPage() {
                   />
                 </div>
 
-                {/* Flashcard (shown when study option is active) */}
-                {activeOption === "study" && (
-                  <div className="mb-8">
+                {/* Difficulty Selector */}
+                <div className="mb-4">
+                  <DifficultySelector
+                    options={[
+                      { id: "easy", label: "Mudah" },
+                      { id: "medium", label: "Medium" },
+                      { id: "hard", label: "Susah" },
+                    ]}
+                    defaultSelected={difficulty}
+                    totalPages={6}
+                    defaultPage={currentPage}
+                    onDifficultyChange={handleDifficultyChange}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
+
+                {/* Info Bar */}
+                <div className="mb-6">
+                  <InfoBar
+                    duration="2 hours"
+                    questionCount={24}
+                    onDownload={handleDownload}
+                    onAnswers={handleAnswers}
+                  />
+                </div>
+
+                {/* FlashCards replacing Material Section */}
+                <div className="space-y-8 mb-8">
+                  {flashcards.map((card, index) => (
                     <FlashCardMath
-                      questionNumber="1"
-                      marks={5}
-                      question="Hitunglah integral berikut:"
-                      latexExpression="∫ x² dx"
+                      key={index}
+                      questionNumber={card.questionNumber}
+                      marks={card.marks}
+                      question={card.question}
+                      latexExpression={card.latexExpression}
                     />
-                  </div>
-                )}
-
-                {/* What is Integral Section - Using MaterialSection */}
-                <div className="mb-6">
-                  <h2 className="text-lg font-medium mb-4">
-                    Apa itu Integral?
-                  </h2>
-                  <MaterialSection
-                    summaryPoints={[
-                      "Integrasi merupakan kebalikan dari diferensiasi",
-                      "Integrasi disebut sebagai antidiferensiasi",
-                      "Hasil integrasi disebut sebagai antiturunan",
-                    ]}
-                    detailedExplanation="Integral tak tentu dari suatu fungsi f, dinotasikan sebagai ∫f(x)dx, merupakan fungsi F sedemikian hingga F′(x) = f(x). Ini adalah kebalikan dari diferensiasi, yang merupakan operasi untuk menemukan turunan dari suatu fungsi."
-                  />
-                </div>
-
-                {/* Formula Section */}
-                <div className="mb-6">
-                  <h2 className="text-lg font-medium mb-4">Formula Integral</h2>
-                  <div className="bg-white rounded-lg border border-gray-200 p-6 flex justify-center">
-                    <Image
-                      src="/learn.jpeg"
-                      alt="Integral formula"
-                      width={300}
-                      height={100}
-                      className="object-contain"
-                    />
-                  </div>
-
-                  {/* Formula explanation - Using MaterialSection */}
-                  <div className="mt-4">
-                    <MaterialSection
-                      summaryPoints={[
-                        "∫ xⁿ dx = (xⁿ⁺¹)/(n+1) + C, untuk n ≠ -1",
-                        "∫ eˣ dx = eˣ + C",
-                        "∫ sin(x) dx = -cos(x) + C",
-                      ]}
-                      detailedExplanation="Formula dasar integral melibatkan aturan-aturan seperti integral fungsi konstan, integral x pangkat n, integral fungsi eksponensial, dan integral fungsi trigonometri. Aturan-aturan ini membantu kita menyelesaikan integral dari berbagai jenis fungsi."
-                      buttonText="Lihat Penjelasan"
-                    />
-                  </div>
-                </div>
-
-                {/* Constants Section - Using MaterialSection */}
-                <div className="mb-6">
-                  <h2 className="text-lg font-medium mb-4">
-                    Apa konstanta integrasi?
-                  </h2>
-                  <MaterialSection
-                    summaryPoints={[
-                      "Konstanta integrasi dilambangkan dengan C",
-                      "Merupakan nilai konstan yang ditambahkan saat integrasi",
-                      "Nilai C dapat ditemukan dengan mensubstitusi kondisi awal",
-                    ]}
-                    detailedExplanation={
-                      <div>
-                        <p>
-                          Konstanta integrasi (C) adalah konstanta yang muncul
-                          dalam hasil integral tak tentu. Ini diperlukan karena
-                          turunan dari fungsi yang berbeda sebesar konstanta
-                          adalah sama.
-                        </p>
-                        <p className="mt-2">
-                          {"Contoh: F(x) = x² + 3 dan G(x) = x² + 5 memiliki"}
-                          {"turunan yang sama: F'(x) = G'(x) = 2x."}
-                        </p>
-                      </div>
-                    }
-                  />
+                  ))}
                 </div>
 
                 {/* Continue Button */}
@@ -217,7 +221,7 @@ export default function IntegralPage() {
                   <RegularCourseMaterial
                     id="integral-dasar"
                     title="Latihan Integral Dasar Rp 50.000,00"
-                    imageSrc="/learn.jpeg"
+                    imageSrc="/placeholder.svg?height=200&width=400"
                     onReadFullText={handleReadFullText}
                     onAudioSelect={handleAudioSelect}
                     onTextSelect={handleTextSelect}
