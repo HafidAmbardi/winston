@@ -11,13 +11,13 @@ export default function WritingFeedbackPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Handle prompt submission
+
   const handlePromptSubmit = (prompt: string) => {
     setSearchQuery(prompt);
     console.log("Searching for:", prompt);
   };
 
-  // Handle navigation to exercises or reading full texts
+  
   const handleNavigation = (path: string) => {
     console.log(`Navigating to ${path}`);
     router.push(path);
@@ -25,17 +25,17 @@ export default function WritingFeedbackPage() {
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
+     
       <WinstonSidebar />
 
-      {/* Main Content Area */}
+     
       <div className="flex flex-col flex-1 overflow-hidden">
         <WinstonHeader />
 
-        {/* Page Content */}
+     
         <main className="flex-1 overflow-auto p-6">
           <div className="max-w-6xl mx-auto">
-            {/* Prompt Section */}
+           
             <div className="mb-8 w-1/2 mx-auto">
               <PromptInput
                 showButtons={false}
@@ -46,7 +46,7 @@ export default function WritingFeedbackPage() {
               />
             </div>
 
-            {/* Feedback Report Section */}
+           
             <h1 className="text-2xl font-bold mb-6">Feedback dan Saran</h1>
             <FeedbackReport
               title="Feedback untuk Deskripsi Tulisan"
@@ -91,7 +91,7 @@ export default function WritingFeedbackPage() {
               }}
             />
 
-            {/* Other Sections */}
+            
             <div className="mt-12">
               <h2 className="text-xl font-medium mb-4">Latihan Mendeskripsikan Gambar</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
