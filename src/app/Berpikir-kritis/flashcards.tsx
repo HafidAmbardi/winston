@@ -198,61 +198,38 @@ export default function FlashcardsPage() {
                     <div className="mt-4">
                       <p className="text-sm mb-2">Bagaimana pengerjaanmu?</p>
                       <div className="flex gap-2 mb-4">
-                        <button className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center border border-green-300">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
+                        {/* Dynamic Buttons with Icons */}
+                        <button
+                          className="p-2 bg-primary-400 rounded-full shadow w-8 h-8 border border-[#EEF2F6] flex items-center justify-center border-opacity-100"
+                          style={{ backgroundColor: "#FFC052" }}
+                        >
+                          <img src="check.png" alt="Check Icon" className="w-4 h-4" />
                         </button>
-                        <button className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center border border-red-300">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                          </svg>
+                        <button
+                          className="p-2 bg-primary-400 rounded-full shadow w-8 h-8 border border-[#EEF2F6] flex items-center justify-center border-opacity-100"
+                          style={{ backgroundColor: "#FFC052" }}
+                        >
+                          <img src="no (wrong).png" alt="Wrong Icon" className="w-4 h-4" />
                         </button>
-                        <button className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center border border-yellow-300">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                          </svg>
+                        <button
+                          className="p-2 bg-primary-400 rounded-full shadow w-8 h-8 border border-[#EEF2F6] flex items-center justify-center border-opacity-100"
+                          style={{ backgroundColor: "#FFC052" }}
+                        >
+                          <img src="flag.png" alt="Flag Icon" className="w-4 h-4" />
                         </button>
                       </div>
+                      <button className="bg-primary-400 text-black px-4 py-2 rounded-md w-full"  style={{ backgroundColor: "#FFC052" }}>Lihat Pembahasan
+                    
+                      </button>
                     </div>
-
-                    <button className="bg-yellow-500 text-white px-4 py-2 rounded-md w-full">Lihat Pembahasan</button>
                   </div>
+                
+          
 
+            
                   <div className="bg-[#FFF8E7] p-4 rounded-md shadow-sm border border-[#C77F00]">
                     <div className="flex justify-between items-center mb-4">
-                      <h2 className="font-semibold text-lg">1b</h2>
+                      <h2 className="font-semibold text-lg">1a</h2>
                       <span className="text-sm">2 marks</span>
                     </div>
                     <p>Apa yang akan kamu lakukan jika menemukan kesalahan dalam proyek yang hampir selesai?</p>
@@ -261,67 +238,34 @@ export default function FlashcardsPage() {
                     <div className="mt-4">
                       <p className="text-sm mb-2">Bagaimana pengerjaanmu?</p>
                       <div className="flex gap-2 mb-4">
-                        <button className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center border border-green-300">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
+                        {/* Dynamic Buttons with Icons */}
+                        <button
+                          className="p-2 bg-primary-400 rounded-full shadow w-8 h-8 border border-[#EEF2F6] flex items-center justify-center border-opacity-100"
+                          style={{ backgroundColor: "#FFC052" }}
+                        >
+                          <img src="check.png" alt="Check Icon" className="w-4 h-4" />
                         </button>
-                        <button className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center border border-red-300">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                          </svg>
+                        <button
+                          className="p-2 bg-primary-400 rounded-full shadow w-8 h-8 border border-[#EEF2F6] flex items-center justify-center border-opacity-100"
+                          style={{ backgroundColor: "#FFC052" }}
+                        >
+                          <img src="no (wrong).png" alt="Wrong Icon" className="w-4 h-4" />
                         </button>
-                        <button className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center border border-yellow-300">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                          </svg>
+                        <button
+                          className="p-2 bg-primary-400 rounded-full shadow w-8 h-8 border border-[#EEF2F6] flex items-center justify-center border-opacity-100"
+                          style={{ backgroundColor: "#FFC052" }}
+                        >
+                          <img src="flag.png" alt="Flag Icon" className="w-4 h-4" />
                         </button>
                       </div>
-                    </div>
-
-                    <button className="bg-yellow-500 text-white px-4 py-2 rounded-md w-full">Lihat Pembahasan</button>
-                  </div>
-
-                  {/* Continue button */}
-                  <div className="text-center">
-                    <button className="bg-[#BD7800] text-white py-2 px-8 rounded-md flex items-center mx-auto">
-                      Lanjutkan
-                      <ChevronRight className="ml-2 h-5 w-5" />
+                      <button className="bg-primary-400 text-black px-4 py-2 rounded-md w-full"  style={{ backgroundColor: "#FFC052" }}>Lihat Pembahasan
+                    
                     </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+                </div>
+             
 
               {/* Right column - Latihan langsung and Top recommendations */}
               <div className="md:w-[346px] space-y-6">
