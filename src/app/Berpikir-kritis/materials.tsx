@@ -1,36 +1,49 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import WinstonSidebar from "@/app/components/sidebar";
-import WinstonHeader from "@/app/components/header";
-import MaterialSection from "@/app/components/material_section";
-import PromptInput from "@/app/components/prompt_input";
-import RegularCourseMaterial from "@/app/components/regular_course_material";
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import WinstonSidebar from "@/app/components/sidebar"
+import WinstonHeader from "@/app/components/header"
+import MaterialSection from "@/app/components/material_section"
+import PromptInput from "@/app/components/prompt_input"
+import RegularCourseMaterial from "@/app/components/regular_course_material"
+
+interface ProblemSolvingStep {
+  id: number
+  title: string
+  description: string
+  example: string
+}
+
+interface RecommendedCourse {
+  id: string
+  title: string
+  imageSrc: string
+}
 
 export default function ProblemSolvingPage() {
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState<string>("")
 
   const handlePromptSubmit = (prompt: string) => {
-    setSearchQuery(prompt);
-    console.log("Searching for:", prompt);
-  };
+    setSearchQuery(prompt)
+    console.log("Searching for:", prompt)
+  }
 
   const handleReadFullText = (id: string) => {
-    console.log(`Reading full text for section ${id}`);
-    router.push(`/problem-solving/material?id=${id}`);
-  };
+    console.log(`Reading full text for section ${id}`)
+    router.push(`/problem-solving/material?id=${id}`)
+  }
 
   const handleAudioSelect = () => {
-    console.log("Audio option selected");
-  };
+    console.log("Audio option selected")
+  }
 
   const handleTextSelect = () => {
-    console.log("Text option selected");
-  };
+    console.log("Text option selected")
+  }
 
-  const problemSolvingSteps = [
+  const problemSolvingSteps: ProblemSolvingStep[] = [
     {
       id: 1,
       title: "Identifikasi Masalah",
@@ -55,9 +68,9 @@ export default function ProblemSolvingPage() {
       example:
         "Solusi untuk meningkatkan engagement: 🔹 Lakukan survei cepat untuk memahami preferensi pengguna.\n🔹 Tambahkan fitur gamifikasi untuk meningkatkan interaksi.\n🔹 Optimalkan UI/UX agar lebih menarik dan intuitif.",
     },
-  ];
+  ]
 
-  const recommendedCourses = [
+  const recommendedCourses: RecommendedCourse[] = [
     {
       id: "201",
       title: "Penerapan SCAMPER dalam Problem Solving",
@@ -73,7 +86,7 @@ export default function ProblemSolvingPage() {
       title: "Metode 5W+1H untuk Analisis Masalah",
       imageSrc: "/problem-solving-3.jpeg",
     },
-  ];
+  ]
 
   return (
     <div className="flex h-screen">
@@ -84,7 +97,7 @@ export default function ProblemSolvingPage() {
 
         <main className="flex-1 overflow-auto p-6">
           <div className="max-w-6xl mx-auto">
-
+            {/* Prompt Input Section */}
             <div className="mb-8 w-1/2 mx-auto">
               <PromptInput
                 showButtons={false}
@@ -95,23 +108,35 @@ export default function ProblemSolvingPage() {
               />
             </div>
 
+            {/* Problem Solving Steps */}
             <h1 className="text-2xl font-bold mb-6">Langkah-Langkah Pemecahan Masalah</h1>
             <div className="grid gap-6 mb-12">
               {problemSolvingSteps.map((step) => (
-                <MaterialSection
-                  key={step.id}
-                  title={step.title}
-                  description={step.description}
-                  example={step.example}
-                  onAudioSelect={handleAudioSelect}
-                  onTextSelect={handleTextSelect}
-                />
+             <MaterialSection
+             summaryPoints={[
+               "🔹 Tentukan masalah utama yang ingin diselesaikan.",
+               "🔹 Pastikan pemahaman yang jelas terhadap situasi yang terjadi.",
+               "🔹 Gunakan metode 5W+1H (What, Why, Who, When, Where, How) untuk menggali informasi lebih dalam.",
+             ]}
+             detailedExplanation={
+               <div>
+                 <p>
+                   Masalah: "Penurunan engagement pengguna pada platform edukasi online."
+                 </p>
+                 <p>
+                   Apa yang terjadi? Engagement menurun dalam 3 bulan terakhir. Mengapa?
+                   Mungkin karena materi kurang menarik atau persaingan tinggi.
+                 </p>
+               </div>
+             }
+             buttonText="Lihat Penjelasan Lengkap"
+           />
               ))}
             </div>
 
+            {/* Recommended Courses */}
             <div className="mb-6">
               <h3 className="text-xl font-medium mb-4">Rekomendasi lainnya untukmu</h3>
-
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {recommendedCourses.map((course) => (
                   <div key={course.id}>
@@ -131,5 +156,6 @@ export default function ProblemSolvingPage() {
         </main>
       </div>
     </div>
-  );
+  )
 }
+
