@@ -6,41 +6,46 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const { prompt } = await req.json();
+    const { prompt } = await request.json();
 
-    if (!prompt || typeof prompt !== "string") {
+    if (!prompt) {
       return NextResponse.json(
-        { message: "Prompt is required and must be a string" },
+        { message: "Prompt is required" },
         { status: 400 }
       );
     }
 
-    if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json(
-        { message: "OpenAI API key is not configured" },
-        { status: 500 }
-      );
-    }
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+    // Using ChatCompletion instead of responses.create
+    const response = await openai.chat.completions.create({
+      model: "gpt-4-turbo", // Using a model that's more widely available
+      response_format: { type: "json_object" },
       messages: [
-        { role: "system", content: "You are Winston AI, a helpful assistant." },
+        {
+          role: "system",
+          content:
+            'You are Winston AI, a knowledgeable educational assistant. Break down complex topics into clear, concise explanations. For each response, provide a structured output with multiple sections. Each section should contain a short summary and a more detailed explanation. Your response should follow this JSON structure exactly: { "title": "string", "sections": [ { "summaryPoints": ["string"], "detailedExplanation": "string", "buttonText": "string" } ] }',
+        },
         { role: "user", content: prompt },
       ],
-      max_tokens: 1000,
     });
 
-    const message = completion.choices[0].message.content;
+    // Extract the content from the response
+    const content = response.choices[0]?.message?.content;
 
-    return NextResponse.json({ message });
+    if (!content) {
+      throw new Error("No content returned from OpenAI");
+    }
+
+    // Parse the JSON response
+    const structuredContent = JSON.parse(content);
+
+    return NextResponse.json({ message: structuredContent });
   } catch (error) {
     console.error("Error in chat API:", error);
-
     return NextResponse.json(
-      { message: "Failed to process your request" },
+      { message: "Failed to process your request", error: String(error) },
       { status: 500 }
     );
   }

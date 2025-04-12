@@ -5,6 +5,7 @@ import WinstonSidebar from "@/app/components/sidebar";
 import WinstonHeader from "@/app/components/header";
 import PromptInput from "@/app/components/prompt_input";
 import PremiumBanner from "@/app/components/premium_banner";
+import MaterialSection from "@/app/components/material_section";
 import { useChat } from "@/app/components/useChat";
 
 export default function Dashboard() {
@@ -66,10 +67,20 @@ export default function Dashboard() {
             {/* Response display */}
             {response && (
               <div className="p-6 bg-gray-50 rounded-lg shadow-sm">
-                <h2 className="text-sm font-semibold mb-2 text-gray-500">
-                  Winston AI
+                <h2 className="text-xl font-semibold mb-4 text-gray-800">
+                  {response.title}
                 </h2>
-                <div className="prose max-w-none">{response}</div>
+
+                <div className="space-y-6">
+                  {response.sections.map((section, index) => (
+                    <MaterialSection
+                      key={index}
+                      summaryPoints={section.summaryPoints}
+                      detailedExplanation={section.detailedExplanation}
+                      buttonText={section.buttonText || "Penjelasan Lengkap"}
+                    />
+                  ))}
+                </div>
               </div>
             )}
           </div>

@@ -2,10 +2,21 @@
 
 import { useState } from "react";
 
+interface Section {
+  summaryPoints: string[];
+  detailedExplanation: string;
+  buttonText?: string;
+}
+
+interface StructuredResponse {
+  title: string;
+  sections: Section[];
+}
+
 interface UseChatReturn {
   prompt: string;
   setPrompt: (prompt: string) => void;
-  response: string | null;
+  response: StructuredResponse | null;
   isLoading: boolean;
   error: string | null;
   sendMessage: () => Promise<void>;
@@ -13,7 +24,7 @@ interface UseChatReturn {
 
 export function useChat(): UseChatReturn {
   const [prompt, setPrompt] = useState<string>("");
-  const [response, setResponse] = useState<string | null>(null);
+  const [response, setResponse] = useState<StructuredResponse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
