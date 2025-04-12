@@ -1,4 +1,4 @@
-import OptimizeButton from "./optimize-button"
+import OptimizeButton from "@/app/optimize-button"
 import { BookOpen, ChevronRight } from "lucide-react"
 
 export default function UsageExample() {
