@@ -1,6 +1,6 @@
 import Image from "next/image"
-import Navbar from "@/components/navbar"
-import ButtonOptimal from "@/components/button-optimal"
+import Navbar from "@/app/components/navbar"
+import ButtonOptimal from "@/app/components/button-optimal"
 
 export default function HomePage() {
   return (
