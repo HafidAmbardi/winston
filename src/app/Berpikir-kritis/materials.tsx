@@ -121,14 +121,13 @@ export default function ProblemSolvingPage() {
              detailedExplanation={
                <div>
                  <p>
-                   Masalah: "Penurunan engagement pengguna pada platform edukasi online."
-                 </p>
-                 <p>
-                   Apa yang terjadi? Engagement menurun dalam 3 bulan terakhir. Mengapa?
-                   Mungkin karena materi kurang menarik atau persaingan tinggi.
+                 Untuk menyelesaikan suatu permasalahan secara efektif, langkah pertama adalah mengidentifikasi masalah utama yang ingin diselesaikan agar solusi yang diambil benar-benar relevan dan berdampak. Pemahaman yang jelas terhadap situasi yang terjadi sangat penting agar tidak salah dalam menganalisis penyebab dan konsekuensi dari masalah tersebut. Pendekatan 5W+1H dapat digunakan untuk menggali informasi lebih dalam, yaitu dengan menjawab pertanyaan What (Apa masalahnya?), Why (Mengapa masalah ini terjadi?), Who (Siapa yang terlibat atau terdampak?), When (Kapan masalah ini muncul atau sering terjadi?), Where (Di mana masalah ini terjadi?), dan How (Bagaimana masalah ini bisa terjadi atau bagaimana cara mengatasinya?). Dengan menjawab pertanyaan-pertanyaan ini secara sistematis, kita dapat memperoleh gambaran yang lebih komprehensif tentang akar permasalahan serta menyusun strategi penyelesaian yang lebih efektif dan tepat sasaran.
                  </p>
                </div>
              }
+             
+
+             
              buttonText="Lihat Penjelasan Lengkap"
            />
               ))}
@@ -158,4 +157,5 @@ export default function ProblemSolvingPage() {
     </div>
   )
 }
+
 
