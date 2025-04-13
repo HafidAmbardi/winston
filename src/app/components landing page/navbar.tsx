@@ -20,7 +20,7 @@ export default function Navbar() {
     <nav className="w-full px-6 py-4 bg-white shadow-sm border-b border-black/10 flex justify-between items-center">
 
       <div className="flex items-center gap-3">
-        <Image src="/images/winston_logo.png" alt="Winston Logo" width={63} height={45} className="object-contain" />
+        <Image src="/winston_logo.png" alt="Winston Logo" width={63} height={45} className="object-contain" />
         <span className="text-xl font-semibold font-['Plus_Jakarta_Sans'] text-black">Winston</span>
       </div>
 
@@ -31,7 +31,7 @@ export default function Navbar() {
         <NavLink href="/latihan-soal">Latihan soal</NavLink>
         <NavLink href="/package">Package</NavLink>
 
-
+        
         <div className="flex items-center gap-2 ml-8">
           <Link
             href="/login"
