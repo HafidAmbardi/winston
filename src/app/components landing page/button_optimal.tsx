@@ -1,38 +1,56 @@
-import OptimizeButton from "@/app/optimize-button"
-import { BookOpen, ChevronRight } from "lucide-react"
+import type React from "react"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+import { cn } from "@/lib/utils"
 
-export default function UsageExample() {
+interface ButtonProps {
+  children?: React.ReactNode
+  label?: string
+  dimension?: "sm" | "md" | "lg" | "xl" | "2xl"
+  symbol?: React.ReactNode
+  symbolPosition?: "leading" | "trailing"
+  isFullWidth?: boolean
+  href?: string
+  className?: string
+}
+
+const OptimizeButton: React.FC<ButtonProps> = ({
+  children,
+  label,
+  dimension = "md",
+  symbol = <ArrowRight className="w-5 h-5" />,
+  symbolPosition = "trailing",
+  isFullWidth = false,
+  href = "#",
+  className,
+}) => {
+
+  const textContent = children || label
+
+
+  const sizeClasses = {
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg",
+    xl: "px-8 py-4 text-xl",
+    "2xl": "px-10 py-5 text-2xl",
+  }
+
+  const buttonClasses = cn(
+    "inline-flex items-center gap-2 rounded-lg font-semibold font-['Plus_Jakarta_Sans'] transition-colors",
+    "border border-[#FFA405] bg-[#FFA405] text-black hover:bg-[#FFA405]/10",
+    sizeClasses[dimension],
+    isFullWidth ? "w-full justify-center" : "",
+    className,
+  )
+
   return (
-    <div className="space-y-6 p-6">
-      <h2 className="text-xl font-bold">Default Button</h2>
-      <OptimizeButton />
-
-      <h2 className="text-xl font-bold">Custom Text</h2>
-      <OptimizeButton text="Mulai Belajar Sekarang" />
-
-      <h2 className="text-xl font-bold">Different Sizes</h2>
-      <div className="flex flex-wrap gap-4">
-        <OptimizeButton size="sm" text="Small" />
-        <OptimizeButton size="md" text="Medium" />
-        <OptimizeButton size="lg" text="Large" />
-        <OptimizeButton size="xl" text="Extra Large" />
-        <OptimizeButton size="2xl" text="2X Large" />
-      </div>
-
-      <h2 className="text-xl font-bold">Different Icons</h2>
-      <div className="flex flex-wrap gap-4">
-        <OptimizeButton icon={<ChevronRight className="h-5 w-5" />} />
-        <OptimizeButton icon={<BookOpen className="h-5 w-5" />} />
-      </div>
-
-      <h2 className="text-xl font-bold">Icon Position</h2>
-      <div className="flex flex-wrap gap-4">
-        <OptimizeButton iconPosition="leading" text="Leading Icon" />
-        <OptimizeButton iconPosition="trailing" text="Trailing Icon" />
-      </div>
-
-      <h2 className="text-xl font-bold">Full Width</h2>
-      <OptimizeButton fullWidth />
-    </div>
+    <Link href={href} className={buttonClasses}>
+      {symbol && symbolPosition === "leading" && <span>{symbol}</span>}
+      {textContent}
+      {symbol && symbolPosition === "trailing" && <span>{symbol}</span>}
+    </Link>
   )
 }
+
+export default OptimizeButton
