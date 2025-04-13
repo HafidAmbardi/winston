@@ -1,137 +1,52 @@
-# Winston
+# 📖 Winston — Meningkatkan Akses Pendidikan Inklusif bagi Penyandang Disabilitas Kognitif dengan Winston
+**Solusi Berbasis AI untuk Learning Disabilities (LDs) dan Memory Disabilities (MDs)**
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). The project integrates Firebase for authentication and other services, Tailwind CSS for styling, and follows modern development practices.
 
----
+## ✨ Nama Tim  
+**Thisability**
 
-## Table of Contents
+## ✨ Anggota  
+- Daniel Winston Mandela Tulung  
+- Nareswari Ayu Prabowo
+- Hafid Sasayuda Ambardi
 
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Technologies Used](#technologies-used)
-- [Firebase Configuration](#firebase-configuration)
-- [Linting and Code Quality](#linting-and-code-quality)
-- [Styling](#styling)
-- [Deployment](#deployment)
-- [Learn More](#learn-more)
+## ✨ Brief Explanation  
+**Winston** adalah platform **AI pertama di Indonesia** yang dirancang khusus untuk individu dengan disabilitas kognitif, menghadirkan pengalaman belajar yang personal, adaptif, dan inklusif.
 
----
+Fitur-fitur **Winston** dikembangkan secara langsung untuk mengatasi masalah dan celah yang ada dalam pendidikan, pekerjaan, dan kehidupan sehari-hari bagi individu dengan LDs & MDs:
 
-## Getting Started
+- **Winston AI** - **Smart Learning Companion**
+- **Winston Recall** - **Spaced Repetition System**  
+- **Winston Progress** -  **Gamified Learning Tracker**
+- **Winston Pathways** - **Adaptive Learning Journeys**  
+- **Winston Focus** - **Enhanced Accessibility Mode**
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
-
----
-
-## Project Structure
-
-The project is organized as follows:
-
-```
-winston/
-├── .next/                # Next.js build output
-├── public/               # Static assets (images, icons, etc.)
-├── src/                  # Source code
-│   ├── app/              # Application logic and pages
-│   ├── firebase/         # Firebase configuration and initialization
-│   ├── components/       # Reusable UI components
-│   ├── lib/              # Utility functions and helpers
-│   ├── hooks/            # Custom React hooks
-├── tailwind.config.ts    # Tailwind CSS configuration
-├── eslint.config.mjs     # ESLint configuration
-├── package.json          # Project dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-└── README.md             # Project documentation
-```
+Kemampuan utama Winston:  
+- Menjawab pertanyaan apapun dengan langkah-langkah jelas  
+- Secara otomatis membuat kuis & pertanyaan berbasis percakapan  
+- Menyediakan white noise untuk fokus  
+- Dashboard progres melacak pencapaian, tantangan, dan kemajuan pengguna  
+- Pre-assessment untuk menentukan kebutuhan & kemampuan pengguna  
+- Menghasilkan jawaban dalam bentuk chunks untuk memudahkan pemahaman  
+- Mendukung multimodal learning (teks, audio, visual)  
+- Roadmap otomatis berdasarkan topik yang dipilih  
+- Menggunakan pengulangan terjadwal untuk meningkatkan retensi ingatan  
+- Memotivasi pengguna dengan elemen gamifikasi  
+- Koleksi materi siap pakai yang direkomendasikan sesuai hasil pre-assessment  
 
 ---
 
-## Technologies Used
+## ✨ Produk Akhir
 
-- **Next.js**: React framework for server-side rendering and static site generation.
-- **Firebase**: Used for authentication and other backend services.
-- **Tailwind CSS**: Utility-first CSS framework for styling.
-- **TypeScript**: Strongly typed JavaScript for better developer experience.
-- **ESLint**: Linting tool for maintaining code quality.
+- 🌐 **Link Website WebApp:** [Link WebApp]  
 
 ---
 
-## Firebase Configuration
-
-The Firebase configuration is located in [`src/app/firebase/config.tsx`](src/app/firebase/config.tsx). It initializes the Firebase app and provides access to Firebase Authentication.
-
-### Environment Variables
-
-The Firebase configuration uses the following environment variables:
-
-- `NEXT_PUBLIC_FIREBASE_API_KEY`
-- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
-- `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
-- `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
-- `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
-- `NEXT_PUBLIC_FIREBASE_APP_ID`
-
-Ensure these variables are set in your `.env` file.
+## ✨ Video Demo  
+🎥 **Video demo (3 menit):** [Link Video Demo]
 
 ---
 
-## Linting and Code Quality
-
-The project uses ESLint for linting. The configuration is defined in [`eslint.config.mjs`](eslint.config.mjs). It extends the `next/core-web-vitals` and `next/typescript` rules for Next.js and TypeScript projects.
-
-Run the following command to lint your code:
-
-```bash
-npm run lint
-```
-
----
-
-## Styling
-
-The project uses Tailwind CSS for styling. The configuration is defined in [`tailwind.config.ts`](tailwind.config.ts). Global styles are located in `src/app/globals.css`.
-
-### Customizations
-
-- **Base Color**: `neutral`
-- **CSS Variables**: Enabled
-- **Icon Library**: `lucide`
-
----
-
-## Deployment
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
----
-
-## Learn More
-
-To learn more about the tools and technologies used in this project, check out the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
-- [Firebase Documentation](https://firebase.google.com/docs) - Learn about Firebase services.
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - Learn about Tailwind CSS.
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/) - Learn about TypeScript.
-
----
-
-## Feedback and Contributions
-
-Your feedback and contributions are welcome! Feel free to open issues or submit pull requests to improve this project.
+## ✨ Catatan  
+> README ini disusun untuk kebutuhan **LDS** dan **MDS**.  
+> Link pengumpulan akan disampaikan sesuai timeline yang ditetapkan.
