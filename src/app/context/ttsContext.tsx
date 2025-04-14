@@ -12,7 +12,7 @@ interface TTSContextType {
   ttsContent: string;
   setTtsContent: (content: string) => void;
   isSpeaking: boolean;
-  startSpeaking: () => void;
+  startSpeaking: (text?: string) => void; // Add optional text parameter
   stopSpeaking: () => void;
 }
 
@@ -38,7 +38,7 @@ export function TTSProvider({ children }: { children: ReactNode }) {
       };
     }
   }, []);
-
+  // Then implement the startSpeaking function to use the parameter if provided
   const startSpeaking = (text?: string) => {
     const textToRead = text || ttsContent;
 

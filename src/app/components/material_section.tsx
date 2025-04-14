@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ChevronDown, Star } from "lucide-react";
-import { doc, getDoc, setDoc, deleteDoc, collection } from "firebase/firestore";
+import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
 import { useAuth } from "@/app/context/auth_context";
 

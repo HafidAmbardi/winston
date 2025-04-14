@@ -15,6 +15,7 @@ import {
 } from "../firebase/firestore";
 import type { ExerciseResult } from "@/app/components/grade_card";
 import type { MaterialStatus } from "@/app/components/material_item";
+import { Timestamp } from "firebase/firestore"; // Add this import
 
 // Define types for all our dashboard data
 interface UserData {
@@ -84,6 +85,51 @@ interface Quiz {
   description: string;
 }
 
+// Define types for Firebase document data structures
+interface UserDocData {
+  displayName?: string;
+  progress?: {
+    overallProgress?: number;
+    totalSteps?: number;
+  };
+  achievements?: {
+    totalPoints?: number;
+    percentile?: number;
+    history?: Array<{
+      date: Timestamp | Date; // Use proper Timestamp type
+      score: number;
+    }>;
+    recentResults?: Array<{
+      date: Timestamp | Date; // Use proper Timestamp type
+      score: number;
+    }>;
+  };
+  smartComparisons?: {
+    percentile?: number;
+    currentPercentage?: number;
+    description?: string;
+    segments?: DonutSegment[];
+  };
+  practiceResults?: {
+    totalScore?: number;
+    results?: Array<{
+      id?: string;
+      title?: string;
+      timestamp?: Timestamp; // Firestore timestamp
+      score?: number | string;
+      maxScore?: number | string;
+      icon?: "image" | "calculator" | "graduation";
+    }>;
+  };
+}
+
+interface Material {
+  id: string;
+  title: string;
+  status: MaterialStatus;
+  imageSrc: string;
+}
+
 interface DashboardContextType {
   loading: boolean;
   userData: UserData | null;
@@ -95,13 +141,7 @@ interface DashboardContextType {
   feedbackData: FeedbackData | null;
   quizData: Quiz[] | null;
 }
-// Then update where it's used in your interface definition
-interface Material {
-  id: string;
-  title: string;
-  status: MaterialStatus;
-  imageSrc: string;
-}
+
 // Create the context
 const DashboardContext = createContext<DashboardContextType>({
   loading: true,
@@ -146,7 +186,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
     // User profile and progress
     const userUnsubscribe = onSnapshot(getUserDoc(userId), (doc) => {
       if (doc.exists()) {
-        const data = doc.data();
+        const data = doc.data() as UserDocData;
         setUserData({
           displayName: data.displayName || "User",
           progress: data.progress?.overallProgress || 0,
@@ -159,7 +199,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
     // Leaderboard
     const leaderboardUnsubscribe = onSnapshot(getUserDoc(userId), (doc) => {
       if (doc.exists()) {
-        const data = doc.data();
+        const data = doc.data() as UserDocData;
         console.log("Raw leaderboard data:", data?.achievements); // Debug log
 
         // Check if achievements data exists
@@ -176,7 +216,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
           // If we have history data with scores
           if (Array.isArray(data.achievements.history)) {
             // Map history data to leaderboard format
-            data.achievements.history.forEach((entry, index) => {
+            data.achievements.history.forEach((entry, index: number) => {
               if (entry && typeof entry === "object") {
                 users.push({
                   rank: index + 1,
@@ -192,7 +232,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
           }
           // Fallback to recent results if no history but we have results
           else if (Array.isArray(data.achievements.recentResults)) {
-            data.achievements.recentResults.forEach((result, index) => {
+            data.achievements.recentResults.forEach((result, index: number) => {
               if (result && typeof result === "object") {
                 users.push({
                   rank: index + 1,
@@ -233,7 +273,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
     // Smart Comparisons (Donut Chart)
     const donutUnsubscribe = onSnapshot(getUserDoc(userId), (doc) => {
       if (doc.exists()) {
-        const data = doc.data();
+        const data = doc.data() as UserDocData;
         console.log("Raw smart comparisons data:", data?.smartComparisons); // Debug log
 
         // Default segments if none are provided or invalid
@@ -254,7 +294,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
           ) {
             // Filter out any invalid segments
             const validSegments = data.smartComparisons.segments.filter(
-              (segment: any) =>
+              (segment: DonutSegment) =>
                 typeof segment === "object" &&
                 segment !== null &&
                 typeof segment.color === "string" &&
@@ -323,7 +363,6 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
       async (snapshot) => {
         try {
           const recommendationDocs = snapshot.docs;
-          const materials: Material[] = [];
 
           // Exit early if no recommendations
           if (recommendationDocs.length === 0) {
@@ -414,7 +453,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
     // Grade Card
     const gradeUnsubscribe = onSnapshot(getUserDoc(userId), (doc) => {
       if (doc.exists()) {
-        const data = doc.data();
+        const data = doc.data() as UserDocData;
         console.log("Raw practice results data:", data?.practiceResults); // Debug log
 
         if (data?.practiceResults) {
@@ -429,7 +468,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
 
           // Process the results array if it exists
           if (Array.isArray(data.practiceResults.results)) {
-            data.practiceResults.results.forEach((result: any) => {
+            data.practiceResults.results.forEach((result) => {
               if (result && typeof result === "object") {
                 // Validate and normalize result data
                 const processedResult: ExerciseResult = {
@@ -497,14 +536,14 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
           const notificationData = doc.data();
           notifications.push({
             id: doc.id,
-            title: notificationData.title,
+            title: notificationData.title || "New Notification",
             timestamp:
               notificationData.timestamp instanceof Date
                 ? notificationData.timestamp.toLocaleString()
                 : new Date(
-                    notificationData.timestamp.toDate()
+                    notificationData.timestamp?.toDate?.() || Date.now()
                   ).toLocaleString(),
-            description: notificationData.description,
+            description: notificationData.description || "",
           });
         });
         setNotificationData(notifications);

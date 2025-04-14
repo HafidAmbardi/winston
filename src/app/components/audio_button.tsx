@@ -7,11 +7,13 @@ import { useTTS } from "@/app/context/ttsContext";
 interface AudioButtonProps {
   onClick?: () => void;
   text?: string;
+  isActive?: boolean; // Add the isActive prop to the interface
 }
 
 export default function AudioButton({
   onClick,
   text = "Ringkasan Audio",
+  isActive = false, // Add default value for isActive
 }: AudioButtonProps) {
   const { isSpeaking, startSpeaking, stopSpeaking, ttsContent } = useTTS();
   const [chunks, setChunks] = useState<string[]>([]);
@@ -89,9 +91,11 @@ export default function AudioButton({
     <button
       onClick={handleClick}
       className={`flex items-center gap-2 px-4 py-2 rounded-md ${
-        isSpeaking ? "bg-amber-600 text-white" : "bg-amber-100 text-gray-800"
+        isSpeaking || isActive
+          ? "bg-amber-600 text-white"
+          : "bg-amber-100 text-gray-800"
       }`}
-      aria-pressed={isSpeaking}
+      aria-pressed={isSpeaking || isActive}
       title={isSpeaking ? "Stop speaking" : "Start speaking"}
     >
       {isSpeaking ? (

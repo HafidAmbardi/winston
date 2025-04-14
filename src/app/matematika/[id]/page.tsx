@@ -262,7 +262,7 @@ export default function DynamicMaterialPage() {
                       questionNumber="1"
                       marks={5}
                       question="Hitunglah integral berikut:"
-                      latexExpression="∫ x² dx"
+                      latexExpression="∫ x² dx" // Ensure this matches the updated type
                     />
                   </div>
                 )}
