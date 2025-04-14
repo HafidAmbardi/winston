@@ -4,7 +4,7 @@ import WinstonSidebar from "@/app/components/sidebar";
 import WinstonHeader from "@/app/components/header";
 import Section from "@/app/components/assesment_test";
 import MaterialSection from "@/app/components/material_section";
-import FlashCardMath from "@/app/components/flashcards_math";
+import FlashCard from "@/app/components/flashcards";
 import FlashCardWrite from "@/app/components/flashcards_write";
 import ReadingSection from "@/app/components/reading";
 import Popup from "@/app/components/popup";
@@ -68,7 +68,7 @@ export default function Dashboard() {
               </div>
             }
           />
-          <FlashCardMath
+          <FlashCard
             questionNumber="1"
             marks={5}
             question="Hitunglah integral berikut:"

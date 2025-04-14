@@ -12,7 +12,7 @@ interface FlashCardProps {
   imageUrl?: string; // Add image URL prop
 }
 
-export default function FlashCardMath({
+export default function FlashCard({
   questionNumber,
   marks,
   question,

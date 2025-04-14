@@ -17,7 +17,7 @@ import RegularCourseMaterial from "@/app/components/regular_course_material";
 import AudioButton from "@/app/components/audio_button";
 import TextButton from "@/app/components/text_button";
 import StudyPlanButton from "@/app/components/study_plan_button";
-import FlashCardMath from "@/app/components/flashcards_math";
+import FlashCard from "@/app/components/flashcards";
 import MaterialSection from "@/app/components/material_section";
 import BookmarkReviewBanner from "@/app/components/bookmark_review_banner";
 import { isDueForReview, getSRSStatus } from "@/app/utils/srs_utils";
@@ -340,7 +340,7 @@ export default function BookmarksPage() {
                             onReviewComplete={handleReviewComplete}
                           />
 
-                          <FlashCardMath
+                          <FlashCard
                             questionNumber={bookmark.id}
                             marks={5}
                             question={bookmark.title}

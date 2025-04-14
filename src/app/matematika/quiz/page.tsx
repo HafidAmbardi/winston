@@ -10,7 +10,7 @@ import AudioButton from "@/app/components/audio_button";
 import TextButton from "@/app/components/text_button";
 import StudyPlanButton from "@/app/components/study_plan_button";
 import QuizList from "@/app/components/quiz";
-import FlashCardMath from "@/app/components/flashcards_math";
+import FlashCard from "@/app/components/flashcards";
 import InfoBar from "@/app/components/info_bar";
 import DifficultySelector from "@/app/components/difficulty_selector";
 
@@ -182,7 +182,7 @@ export default function IntegralPage() {
                 {/* FlashCards replacing Material Section */}
                 <div className="space-y-8 mb-8">
                   {flashcards.map((card, index) => (
-                    <FlashCardMath
+                    <FlashCard
                       key={index}
                       questionNumber={card.questionNumber}
                       marks={card.marks}

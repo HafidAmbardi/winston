@@ -13,7 +13,7 @@ import AudioButton from "@/app/components/audio_button";
 import TextButton from "@/app/components/text_button";
 import StudyPlanButton from "@/app/components/study_plan_button";
 import QuizList from "@/app/components/quiz";
-import FlashCardMath from "@/app/components/flashcards_math";
+import FlashCard from "@/app/components/flashcards";
 import MaterialSection from "@/app/components/material_section";
 
 // Define interfaces for our data types
@@ -258,7 +258,7 @@ export default function DynamicMaterialPage() {
                 {/* Flashcard (shown when study option is active) */}
                 {activeOption === "study" && (
                   <div className="mb-8">
-                    <FlashCardMath
+                    <FlashCard
                       questionNumber="1"
                       marks={5}
                       question="Hitunglah integral berikut:"
