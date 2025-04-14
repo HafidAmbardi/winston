@@ -1,74 +1,99 @@
-"use client";
-
 import { useState } from "react";
+import { useTTS } from "../context/ttsContext";
 
-interface UseChatReturn {
-  prompt: string;
-  setPrompt: (prompt: string) => void;
-  response: string | null;
-  isLoading: boolean;
-  error: string | null;
-  sendMessage: () => Promise<void>;
+// Define proper types for the response structure
+interface SummarySection {
+  summaryPoints: string[];
+  detailedExplanation: string;
+  buttonText?: string;
 }
 
-export function useChat(): UseChatReturn {
-  const [prompt, setPrompt] = useState<string>("");
-  const [response, setResponse] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+interface ChatResponse {
+  title: string;
+  sections: SummarySection[];
+}
 
-  const sendMessage = async (): Promise<void> => {
-    if (!prompt.trim()) return;
+export function useChat() {
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState<ChatResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { setTtsContent } = useTTS();
+
+  const sendMessage = async (mode: "text" | "study" = "text") => {
+    // Only show error if user manually clicks submit with empty prompt
+    // Don't show error on initial page load
+    if (prompt.trim() === "") {
+      // Only set error if user actually tried to submit an empty prompt
+      if (prompt !== "") {
+        setError("Please enter a prompt");
+      }
+      return;
+    }
 
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await fetch("/api/chat", {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt, mode }),
       });
 
-      // Get the response content type
-      const contentType = response.headers.get("content-type");
+      const data = await res.json();
 
-      // Log response information for debugging
-      console.log("Response status:", response.status);
-      console.log("Response content type:", contentType);
-
-      // If not JSON, try to get the text to see what's being returned
-      if (!contentType || !contentType.includes("application/json")) {
-        const responseText = await response.text();
-        console.error(
-          "Non-JSON response content:",
-          responseText.substring(0, 500)
-        ); // Log first 500 chars
-        throw new Error(
-          `Expected JSON response but got ${
-            contentType || "unknown content type"
-          }`
-        );
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to get response");
       }
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || `Server error: ${response.status}`
-        );
-      }
+      const responseData = data.message as ChatResponse;
+      setResponse(responseData);
 
-      const data = await response.json();
-      setResponse(data.message);
-      setPrompt("");
+      // Generate a readable text version of the response
+      const formattedText = formatTTSContent(responseData);
+      setTtsContent(formattedText);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
-      console.error("Chat error:", err);
+      console.error("Error sending message:", err);
+      setError(
+        err instanceof Error
+          ? err.message
+          : "An error occurred while fetching the response"
+      );
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Helper function to format response for TTS
+  const formatTTSContent = (response: ChatResponse): string => {
+    if (!response) return "";
+
+    let ttsText = `${response.title}. `;
+
+    // Add each section content
+    response.sections.forEach((section, index) => {
+      ttsText += `Bagian ${index + 1}. `;
+
+      // Add summary points
+      if (section.summaryPoints && section.summaryPoints.length > 0) {
+        ttsText += "Ringkasan: ";
+        section.summaryPoints.forEach((point) => {
+          ttsText += `${point}. `;
+        });
+      }
+
+      // Add detailed explanation
+      if (section.detailedExplanation) {
+        ttsText += `Penjelasan: ${section.detailedExplanation} `;
+      }
+
+      ttsText += " ";
+    });
+
+    return ttsText;
   };
 
   return {

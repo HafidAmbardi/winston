@@ -18,7 +18,7 @@ export async function seedUserData(userId: string) {
     batch.set(userRef, {
       displayName: "Rafael Pereira",
       email: "rafael.pereira@example.com",
-      photoURL: "/avatar-placeholder.png",
+      photoURL: "/avatar.webp",
       createdAt: serverTimestamp(),
       progress: {
         completedMaterials: 2,

@@ -1,10 +1,14 @@
 "use client";
+
+import { useRouter } from "next/navigation";
 import MaterialItem, {
   type MaterialStatus,
 } from "@/app/components/material_item";
+import { useEffect } from "react";
 
 // Export these interfaces so they can be imported elsewhere
 export type { MaterialStatus } from "@/app/components/material_item"; // Re-export from source
+
 export interface Material {
   id: string;
   title: string;
@@ -20,35 +24,31 @@ interface MaterialsListProps {
 
 export default function MaterialsList({
   title = "Perkembangan Belajarmu",
-  materials = [
-    {
-      id: "1",
-      title: "Bilangan & Operasi Dasar",
-      status: "completed",
-      imageSrc: "/placeholder.svg?height=128&width=128",
-    },
-    {
-      id: "2",
-      title: "Bilangan & Operasi Dasar",
-      status: "in-progress",
-      imageSrc: "/placeholder.svg?height=128&width=128",
-    },
-    {
-      id: "3",
-      title: "Bilangan & Operasi Dasar",
-      status: "on-hold",
-      imageSrc: "/placeholder.svg?height=128&width=128",
-    },
-    {
-      id: "4",
-      title: "Bilangan & Operasi Dasar",
-      status: "on-hold",
-      imageSrc: "/placeholder.svg?height=128&width=128",
-    },
-  ],
-  onVisitMaterial = (materialId) =>
-    console.log(`Visiting material ${materialId}`),
+  materials = [],
+  onVisitMaterial,
 }: MaterialsListProps) {
+  const router = useRouter();
+
+  // Default handler that navigates to the material page
+  const handleVisitMaterial = (materialId: string) => {
+    if (onVisitMaterial) {
+      // Use custom handler if provided
+      onVisitMaterial(materialId);
+    } else {
+      // Check if material is a reading and route accordingly
+      if (materialId.startsWith("reading")) {
+        router.push(`/membaca/${materialId}`); // This will route to the dynamic [id] route
+      } else {
+        router.push(`/materials/${materialId}`);
+      }
+    }
+  };
+
+  // Safety check to ensure materials is an array
+  const safeMaterials = Array.isArray(materials) ? materials : [];
+  useEffect(() => {
+    console.log("MaterialsList props received:", { title, materials });
+  }, [title, materials]);
   return (
     <div className="w-full max-w-md mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
       <div className="p-4 border-b">
@@ -56,15 +56,21 @@ export default function MaterialsList({
       </div>
 
       <div className="p-4">
-        {materials.map((material) => (
-          <MaterialItem
-            key={material.id}
-            title={material.title}
-            status={material.status}
-            imageSrc={material.imageSrc}
-            onVisit={() => onVisitMaterial(material.id)}
-          />
-        ))}
+        {safeMaterials.length === 0 ? (
+          <div className="py-6 text-center text-gray-500">
+            Belum ada materi tersedia.
+          </div>
+        ) : (
+          safeMaterials.map((material) => (
+            <MaterialItem
+              key={material.id}
+              title={material.title}
+              status={material.status}
+              imageSrc={material.imageSrc}
+              onVisit={() => handleVisitMaterial(material.id)}
+            />
+          ))
+        )}
       </div>
     </div>
   );

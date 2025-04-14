@@ -7,70 +7,38 @@ import FeedbackSection from "@/app/components/feedback_section";
 
 type FeedbackType = "audio" | "text" | null;
 
+// Update the interface to match the data structure from Firestore
+interface FeedbackItem {
+  title: string;
+  content?: string[];
+}
+
+interface FeedbackSectionData {
+  title: string;
+  items: FeedbackItem[];
+}
+
 interface FeedbackReportProps {
   title?: string;
-  weaknesses?: {
-    title: string;
-    items: {
-      title: string;
-      content?: string[];
-    }[];
-  };
-  improvements?: {
-    title: string;
-    items: {
-      title: string;
-      content?: string[];
-    }[];
-  };
+  weaknesses?: FeedbackSectionData;
+  improvements?: FeedbackSectionData;
 }
 
 export default function FeedbackReport({
   title = "Feedback report",
   weaknesses = {
     title: "Kekurangan",
-    items: [
-      {
-        title: "Gagasan Utama",
-        content: [
-          "Mispronouncing key sounds may make certain words harder to understand.",
-          "A strong accent or unclear enunciation can sometimes reduce clarity.",
-          "A flat or monotonous tone may make your speech sound less natural.",
-        ],
-      },
-      {
-        title: "Detail",
-        content: [
-          "Mispronouncing key sounds may make certain words harder to understand.",
-          "A strong accent or unclear enunciation can sometimes reduce clarity.",
-          "A flat or monotonous tone may make your speech sound less natural.",
-        ],
-      },
-    ],
+    items: [],
   },
   improvements = {
     title: "Perbaikan",
-    items: [
-      {
-        title: "Pilihan kata dan variasi kalimat",
-        content: [
-          "Mispronouncing key sounds may make certain words harder to understand.",
-          "A strong accent or unclear enunciation can sometimes reduce clarity.",
-          "A flat or monotonous tone may make your speech sound less natural.",
-        ],
-      },
-      {
-        title: "Tanda Baca & Spasi",
-        content: [
-          "Mispronouncing key sounds may make certain words harder to understand.",
-          "A strong accent or unclear enunciation can sometimes reduce clarity.",
-          "A flat or monotonous tone may make your speech sound less natural.",
-        ],
-      },
-    ],
+    items: [],
   },
 }: FeedbackReportProps) {
   const [activeTab, setActiveTab] = useState<FeedbackType>(null);
+
+  // Add debug logging
+  console.log("FeedbackReport props:", { title, weaknesses, improvements });
 
   return (
     <div className="w-full max-w-md mx-auto bg-white rounded-xl shadow-sm overflow-hidden">

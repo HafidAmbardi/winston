@@ -30,7 +30,18 @@ export default function Dashboard() {
     feedbackData,
     quizData,
   } = useDashboard();
-
+  const safeDonutData = {
+    percentage:
+      typeof donutData?.percentage === "number" ? donutData.percentage : 0,
+    segments: Array.isArray(donutData?.segments)
+      ? donutData.segments
+      : [
+          { color: "#b37400", value: 33 },
+          { color: "#d3d3d3", value: 33 },
+          { color: "#f59e0b", value: 34 },
+        ],
+    description: donutData?.description || "",
+  };
   if (!user) {
     // Redirect to login if user is not authenticated
     // This could be handled with middleware
@@ -146,9 +157,9 @@ export default function Dashboard() {
                 ) : (
                   <DonutChart
                     title="Smart Comparisons"
-                    percentage={donutData?.percentage || 0}
-                    segments={donutData?.segments || []}
-                    description={donutData?.description || ""}
+                    percentage={safeDonutData.percentage}
+                    segments={safeDonutData.segments}
+                    description={safeDonutData.description}
                   />
                 )}
               </div>

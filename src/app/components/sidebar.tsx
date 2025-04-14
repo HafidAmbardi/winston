@@ -10,19 +10,19 @@ import {
   Calculator,
   PenTool,
   Brain,
-  HelpCircle,
   Settings,
   LogOut,
+  BookCheck,
 } from "lucide-react";
 
 export default function WinstonSidebar() {
-  const [activeItem, setActiveItem] = useState("home");
+  const [activeItem, setActiveItem] = useState("dashboard");
   const pathname = usePathname();
 
   // Synchronize active state with current path
   useEffect(() => {
     if (pathname === "/") {
-      setActiveItem("home");
+      setActiveItem("dashboard");
     } else if (pathname.startsWith("/winston-ai")) {
       setActiveItem("winston-ai");
     } else if (pathname.startsWith("/informasi")) {
@@ -35,10 +35,8 @@ export default function WinstonSidebar() {
       setActiveItem("menulis");
     } else if (pathname.startsWith("/berpikir-kritis")) {
       setActiveItem("berpikir-kritis");
-    } else if (pathname.startsWith("/referensi")) {
-      setActiveItem("referensi-materi");
-    } else if (pathname.startsWith("/help")) {
-      setActiveItem("help");
+    } else if (pathname.startsWith("/bookmarks")) {
+      setActiveItem("bookmarks");
     } else if (pathname.startsWith("/settings")) {
       setActiveItem("setting");
     }
@@ -68,16 +66,16 @@ export default function WinstonSidebar() {
           <p className="text-sm font-medium mb-2">Menu</p>
           <nav className="space-y-1">
             <Link
-              href="/"
+              href="/dashboard"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
-                activeItem === "home"
+                activeItem === "dashboard"
                   ? "bg-[#e09422] text-white"
                   : "text-gray-600 hover:bg-[#f0e6d9]"
               }`}
-              onClick={() => setActiveItem("home")}
+              onClick={() => setActiveItem("dashboard")}
             >
               <Layers className="w-5 h-5" />
-              <span>Home</span>
+              <span>Dashboard</span>
             </Link>
 
             <Link
@@ -115,7 +113,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/membaca"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "membaca"
                   ? "bg-[#e09422] text-white"
@@ -128,7 +126,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/matematika"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "belajar-matematika"
                   ? "bg-[#e09422] text-white"
@@ -141,7 +139,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/menulis"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "menulis"
                   ? "bg-[#e09422] text-white"
@@ -154,7 +152,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/berpikir"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "berpikir-kritis"
                   ? "bg-[#e09422] text-white"
@@ -165,19 +163,6 @@ export default function WinstonSidebar() {
               <Brain className="w-5 h-5" />
               <span>Berpikir Kritis</span>
             </Link>
-
-            <Link
-              href="#"
-              className={`flex items-center gap-3 px-3 py-2 rounded-md ${
-                activeItem === "referensi-materi"
-                  ? "bg-[#e09422] text-white"
-                  : "text-gray-600 hover:bg-[#f0e6d9]"
-              }`}
-              onClick={() => setActiveItem("referensi-materi")}
-            >
-              <Layers className="w-5 h-5" />
-              <span>Referensi Materi</span>
-            </Link>
           </nav>
         </div>
 
@@ -186,20 +171,20 @@ export default function WinstonSidebar() {
           <p className="text-sm font-medium mb-2">General</p>
           <nav className="space-y-1">
             <Link
-              href="#"
+              href="/bookmarks"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
-                activeItem === "help"
+                activeItem === "bookmarks"
                   ? "bg-[#e09422] text-white"
                   : "text-gray-600 hover:bg-[#f0e6d9]"
               }`}
-              onClick={() => setActiveItem("help")}
+              onClick={() => setActiveItem("bookmarks")}
             >
-              <HelpCircle className="w-5 h-5" />
-              <span>Help and Support</span>
+              <BookCheck className="w-5 h-5" />
+              <span>Bookmark</span>
             </Link>
 
             <Link
-              href="#"
+              href="/comingsoon"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "setting"
                   ? "bg-[#e09422] text-white"
