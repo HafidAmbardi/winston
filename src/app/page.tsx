@@ -1,288 +1,95 @@
-"use client";
+import Image from "next/image";
+import Navbar from "./landingpage/navbar";
+import OptimizeButton from "./landingpage/button_optimal";
 
-import WinstonSidebar from "@/app/components/sidebar";
-import WinstonHeader from "@/app/components/header";
-import ProgressBar from "@/app/components/progress_bar";
-import Leaderboard from "@/app/components/leaderboard";
-import DonutChart from "@/app/components/donut_chart";
-import NotificationFeed from "@/app/components/notification_feed";
-import GradeCard from "@/app/components/grade_card";
-import QuizList from "@/app/components/quiz";
-import FeedbackReport from "@/app/components/feedback_report";
-import MaterialsList from "@/app/components/materials_list";
-import { Home } from "lucide-react";
-
-const userName = "Rafael Pereira"; // Sample user name
-export default function Dashboard() {
-  // Sample data for components
-
+export default function LandingPage() {
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <WinstonSidebar />
+    <main className="min-h-screen bg-[#FBFCFC] relative overflow-hidden">
+      <Image
+        src="/Ellipse54.png"
+        alt="A student with glasses thinking"
+        width={409}
+        height={421}
+        className="absolute left-[433px] top-[192px] -rotate-[14deg] origin-top-left0"
+        priority
+      />
+      <Image
+        src="/Ellipse53.png"
+        alt="A student with glasses thinking"
+        width={423}
+        height={424}
+        className="absolute left-[1009px] top-[100px] -rotate-[14deg] origin-top-left0"
+        priority
+      />
+      <div className="absolute w-[376px] h-[386px] left-[-15px] top-[100px] bg-gradient-to-br from-[rgba(255,236,189,0.3)] to-[rgba(255,206,132,0.9)] rounded-full" />
 
-      {/* Main Content Area */}
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <WinstonHeader userName={userName} />
+      <Navbar />
 
-        {/* Page Content */}
-        <main className="flex-1 overflow-auto p-6">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 mb-6 text-sm text-gray-600">
-            <Home className="w-4 h-4" />
-            <span>Home</span>
-          </div>
+      <section className="container mx-auto px-6 pt-36 pb-24 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+          <div className="lg:col-span-3 max-w-3xl mt-18 pl-0">
+            <h1 className="mb-6 leading-[64px]">
+              <span className="text-black text-[64px]  font-normal">
+                Belajar{" "}
+              </span>
+              <span
+                className="text-[64px] font-bold"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #1E1E1E 13%, #A36800 60%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  display: "inline-block",
+                }}
+              >
+                Tanpa Batas
+              </span>
+              <span className="text-black text-[64px]  font-normal">
+                , Untuk Semua Cara{" "}
+              </span>
+              <span
+                className="text-[64px] font-bold"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #1E1E1E 13%, #A36800 60%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  display: "inline-block",
+                }}
+              >
+                Berpikir
+              </span>
+            </h1>
 
-          {/* Welcome Message */}
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold">Selamat datang, {userName}!</h1>
-            <p className="text-gray-600">
-              Teruslah Berjuang! Berikut Hasil dan Hal yang Harus Anda Tinjau
-              Selanjutnya!
-            </p>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="bg-white rounded-xl p-6 mb-6 shadow-sm">
-            <ProgressBar percentage={40} totalSteps={4} showPercentage={true} />
-          </div>
-
-          {/* Main Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Left Column */}
-            <div className="space-y-6">
-              {/* Leaderboard */}
-              <div className="bg-white rounded-xl shadow-sm">
-                <Leaderboard
-                  title="Pencapaian Terbaikmu"
-                  achievement={{
-                    value: 99.5,
-                    percentage: 100,
-                  }}
-                  users={[
-                    { rank: 1, name: "23 Maret 2023", score: 90, avatar: "" },
-                    { rank: 1, name: "23 Maret 2023", score: 90, avatar: "" },
-                    { rank: 1, name: "23 Maret 2023", score: 90, avatar: "" },
-                    { rank: 1, name: "23 Maret 2023", score: 90, avatar: "" },
-                    { rank: 1, name: "23 Maret 2023", score: 90, avatar: "" },
-                  ]}
-                />
-              </div>
-
-              {/* Notification Feed */}
-              <div className="bg-white rounded-xl shadow-sm">
-                <NotificationFeed
-                  title="Rekomendasi Materi"
-                  notifications={[
-                    {
-                      id: "1",
-                      title: "Belajar Matematika Dasar",
-                      timestamp: "22 DEC 7:20 PM",
-                      description:
-                        "People care about how you see the world, how you think,",
-                    },
-                    {
-                      id: "2",
-                      title: "Belajar Matematika Dasar",
-                      timestamp: "22 DEC 7:20 PM",
-                      description:
-                        "People care about how you see the world, how you think,",
-                    },
-                    {
-                      id: "3",
-                      title: "Belajar Matematika Dasar",
-                      timestamp: "22 DEC 7:20 PM",
-                      description:
-                        "People care about how you see the world, how you think,",
-                    },
-                    {
-                      id: "4",
-                      title: "Belajar Matematika Dasar",
-                      timestamp: "22 DEC 7:20 PM",
-                      description:
-                        "People care about how you see the world, how you think,",
-                    },
-                    {
-                      id: "5",
-                      title: "Belajar Matematika Dasar",
-                      timestamp: "22 DEC 7:20 PM",
-                      description:
-                        "People care about how you see the world, how you think,",
-                    },
-                    {
-                      id: "6",
-                      title: "Belajar Matematika Dasar",
-                      timestamp: "22 DEC 7:20 PM",
-                      description:
-                        "People care about how you see the world, how you think,",
-                    },
-                  ]}
-                />
-              </div>
+            <div className="mb-8">
+              <span className="text-black text-[28px] font-['Plus_Jakarta_Sans'] font-medium leading-[42px]">
+                Pengalaman belajar yang dipersonalisasi dengan teknologi
+                adaptif, untuk{" "}
+              </span>
+              <span className="text-black text-[28px] font-['Plus_Jakarta_Sans'] font-bold leading-[42px]">
+                Disabilitas Kognitif
+              </span>
             </div>
 
-            {/* Middle Column */}
-            <div className="space-y-6">
-              {/* Donut Chart */}
-              <div className="bg-white rounded-xl shadow-sm">
-                <DonutChart
-                  title="Smart Comparisons"
-                  percentage={20}
-                  segments={[
-                    { color: "#b37400", value: 2 }, // Brown/gold
-                    { color: "#d3d3d3", value: 1 }, // Light gray
-                    { color: "#f59e0b", value: 2 }, // Orange/amber
-                  ]}
-                  description="You've improved 20% in problem-solving this month."
-                />
-              </div>
-
-              {/* Grade Card */}
-              <div className="bg-white rounded-xl shadow-sm">
-                <GradeCard
-                  title="Nilai Hasil Latihanmu!"
-                  totalScore={90.5}
-                  results={[
-                    {
-                      id: "1",
-                      title: "Latihan Integral",
-                      timestamp: "Today, 16:36",
-                      score: "80.5",
-                      maxScore: "100",
-                      icon: "calculator",
-                    },
-                    {
-                      id: "2",
-                      title: "Deskripsi Gambar",
-                      timestamp: "23 Jun, 13:06",
-                      score: "70",
-                      maxScore: "100",
-                      icon: "image",
-                    },
-                    {
-                      id: "3",
-                      title: "Pemecahan Masalah",
-                      timestamp: "21 Jun, 19:04",
-                      score: "16",
-                      maxScore: "24",
-                      icon: "graduation",
-                    },
-                  ]}
-                />
-              </div>
-
-              {/* Feedback Report */}
-              <div className="bg-white rounded-xl shadow-sm">
-                <FeedbackReport
-                  weaknesses={{
-                    title: "Kekurangan",
-                    items: [
-                      {
-                        title: "Gagasan Utama",
-                        content: [],
-                      },
-                      {
-                        title: "Detail",
-                        content: [
-                          "Mispronouncing key sounds may make certain words harder to understand.",
-                          "A strong accent or unclear enunciation can sometimes reduce clarity.",
-                          "A flat or monotonous tone may make your speech sound less natural.",
-                        ],
-                      },
-                    ],
-                  }}
-                  improvements={{
-                    title: "Perbaikan",
-                    items: [
-                      {
-                        title: "Pilihan kata dan variasi kalimat",
-                        content: [],
-                      },
-                      {
-                        title: "Tanda Baca & Spasi",
-                        content: [
-                          "Mispronouncing key sounds may make certain words harder to understand.",
-                          "A strong accent or unclear enunciation can sometimes reduce clarity.",
-                          "A flat or monotonous tone may make your speech sound less natural.",
-                        ],
-                      },
-                    ],
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Right Column */}
-            <div className="space-y-6">
-              {/* Materials List */}
-              <div className="bg-white rounded-xl shadow-sm">
-                <MaterialsList
-                  materials={[
-                    {
-                      id: "1",
-                      title: "Bilangan & Operasi Dasar",
-                      status: "completed",
-                      imageSrc: "/placeholder.svg?height=128&width=128",
-                    },
-                    {
-                      id: "2",
-                      title: "Bilangan & Operasi Dasar",
-                      status: "in-progress",
-                      imageSrc: "/placeholder.svg?height=128&width=128",
-                    },
-                    {
-                      id: "3",
-                      title: "Bilangan & Operasi Dasar",
-                      status: "on-hold",
-                      imageSrc: "/placeholder.svg?height=128&width=128",
-                    },
-                    {
-                      id: "4",
-                      title: "Bilangan & Operasi Dasar",
-                      status: "on-hold",
-                      imageSrc: "/placeholder.svg?height=128&width=128",
-                    },
-                  ]}
-                />
-              </div>
-
-              {/* Quiz List */}
-              <div className="bg-white rounded-xl shadow-sm">
-                <QuizList
-                  title="Uji Pengetahuan dan Kemampuanmu!"
-                  quizzes={[
-                    {
-                      id: "1",
-                      title: "Quiz A",
-                      description: "50 soal tersedia",
-                    },
-                    {
-                      id: "2",
-                      title: "Quiz A",
-                      description: "50 soal tersedia",
-                    },
-                    {
-                      id: "3",
-                      title: "Quiz A",
-                      description: "50 soal tersedia",
-                    },
-                    {
-                      id: "4",
-                      title: "Quiz A",
-                      description: "50 soal tersedia",
-                    },
-                    {
-                      id: "5",
-                      title: "Quiz A",
-                      description: "50 soal tersedia",
-                    },
-                  ]}
-                />
-              </div>
-            </div>
+            <OptimizeButton dimension="lg" href="/auth/signup">
+              Optimalkan Cara Belajarmu Sekarang
+            </OptimizeButton>
           </div>
-        </main>
-      </div>
-    </div>
+
+          <div className="lg:col-span-2 relative h-[500px] lg:h-auto">
+            <Image
+              src="/Daniel.png"
+              alt="A student with glasses thinking"
+              width={470}
+              height={678}
+              className="absolute right-0 top-[-300px] z-10"
+              priority
+            />
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

@@ -9,7 +9,7 @@ interface StudyPlanButtonProps {
 export default function StudyPlanButton({
   isActive = false,
   onClick,
-  text = "Buat rencana belajar",
+  text = "Buat Rencana Belajar",
 }: StudyPlanButtonProps) {
   return (
     <button
