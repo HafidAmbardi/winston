@@ -16,14 +16,13 @@ export async function seedContentData() {
     const batch = writeBatch(db);
     // Update your seed data to include materials for all three categories
 
-    // For mathematics
     const mathematicsMaterials = [
       {
         id: "aggr1",
         category: "mathematics",
         difficulty: "beginner",
         title: "Paket Dasar Matematika",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/math1.png",
         price: 39.99,
         materials: ["detailed1", "detailed2"],
       },
@@ -32,7 +31,7 @@ export async function seedContentData() {
         category: "mathematics",
         difficulty: "intermediate",
         title: "Paket Matematika Lanjutan",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/math2.png",
         price: 59.99,
         materials: ["detailed2", "detailed3"],
       },
@@ -41,12 +40,11 @@ export async function seedContentData() {
         category: "mathematics",
         difficulty: "advanced",
         title: "Matematika Tingkat Tinggi",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/math3.png",
         price: 79.99,
         materials: ["detailed3", "detailed4"],
       },
     ];
-
     // For reading
     const readingMaterials = [
       {
@@ -54,7 +52,7 @@ export async function seedContentData() {
         category: "reading",
         difficulty: "beginner",
         title: "Dasar-Dasar Membaca Efektif",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading1.png",
         price: 29.99,
         materials: ["detailed_reading1", "detailed_reading2"],
       },
@@ -63,7 +61,7 @@ export async function seedContentData() {
         category: "reading",
         difficulty: "intermediate",
         title: "Teknik Membaca Cepat",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 49.99,
         materials: ["detailed_reading3"],
       },
@@ -276,25 +274,24 @@ export async function seedContentData() {
     });
 
     // Seed aggregated materials collection
-    // Update the aggregated materials section in your seedContentData function
     const aggregatedMaterials = [
       {
         id: "aggr1",
         category: "mathematics",
         difficulty: "beginner",
         title: "Paket Dasar Matematika",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/math1.png",
         price: 39.99,
-        materials: ["detailed1", "detailed2"], // Updated to reference detailed_materials
+        materials: ["detailed1", "detailed2"],
       },
       {
         id: "aggr2",
         category: "mathematics",
         difficulty: "intermediate",
         title: "Paket Matematika Lanjutan",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/math2.png",
         price: 59.99,
-        materials: ["detailed2", "detailed3"], // Updated to reference detailed_materials
+        materials: ["detailed2", "detailed3"],
       },
     ];
 
@@ -310,7 +307,7 @@ export async function seedContentData() {
         category: "mathematics",
         difficulty: "beginner",
         title: "Sejarah Bilangan",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/math4.png",
         text: "Konsep bilangan telah berkembang selama ribuan tahun. Sistem penomoran pertama muncul di Mesir Kuno dan Mesopotamia sekitar 3000 SM. Orang Mesir menggunakan sistem hieroglif untuk mewakili angka, sementara orang Babilonia mengembangkan sistem basis-60 yang masih kita gunakan dalam pengukuran waktu dan sudut.",
         price: 9.99,
       },
@@ -319,7 +316,7 @@ export async function seedContentData() {
         category: "mathematics",
         difficulty: "intermediate",
         title: "Tokoh-tokoh Matematika",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading1.png",
         text: "Euclid, seorang matematikawan Yunani yang hidup sekitar 300 SM, dikenal sebagai 'Bapak Geometri'. Karyanya yang berjudul 'Elemen' adalah salah satu buku teks matematika paling berpengaruh sepanjang masa. Isaac Newton dan Gottfried Wilhelm Leibniz secara independen mengembangkan kalkulus pada abad ke-17, yang menjadi dasar bagi banyak kemajuan dalam sains dan teknologi modern.",
         price: 14.99,
       },
@@ -328,7 +325,7 @@ export async function seedContentData() {
         category: "geometry",
         difficulty: "advanced",
         title: "Penerapan Geometri dalam Arsitektur",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         text: "Geometri telah menjadi fondasi dalam arsitektur sejak zaman kuno. Dari piramida Mesir hingga Parthenon Yunani, arsitek telah menggunakan prinsip-prinsip geometri untuk menciptakan struktur yang tidak hanya indah tetapi juga stabil. Konsep seperti proporsi emas (golden ratio) dan simetri telah digunakan dalam desain bangunan selama berabad-abad, menciptakan estetika yang menarik secara universal.",
         price: 19.99,
       },
