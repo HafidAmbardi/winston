@@ -152,7 +152,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/berpikir"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "berpikir-kritis"
                   ? "bg-[#e09422] text-white"

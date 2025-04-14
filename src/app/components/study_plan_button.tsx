@@ -18,10 +18,10 @@ export default function StudyPlanButton({
         isActive ? "bg-amber-600 text-white" : "bg-amber-100 text-gray-800"
       }`}
     >
-      <div className="w-4 h-4 flex items-center justify-center">
+      <div className="w-8 h-8 flex items-center justify-center">
         <svg
-          width="16"
-          height="16"
+          width="32"
+          height="32"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

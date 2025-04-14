@@ -2,93 +2,86 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Volume2, VolumeX } from "lucide-react";
+import { useTTS } from "@/app/context/ttsContext";
 
 interface AudioButtonProps {
-  isActive?: boolean;
   onClick?: () => void;
   text?: string;
-  contentSelector?: string;
-  language?: string;
 }
 
 export default function AudioButton({
-  isActive: initialIsActive = false,
   onClick,
-  text = "Dengarkan Penjelasan",
-  contentSelector = "main",
-  language = "id-ID",
+  text = "Ringkasan Audio",
 }: AudioButtonProps) {
-  const [isActive, setIsActive] = useState(initialIsActive);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const speechSynthRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const { isSpeaking, startSpeaking, stopSpeaking, ttsContent } = useTTS();
+  const [chunks, setChunks] = useState<string[]>([]);
+  const [currentChunkIndex, setCurrentChunkIndex] = useState(0);
+  const isPlayingRef = useRef(false);
 
-  // Initialize speech synthesis
+  // Split the content into chunks of 30 words when ttsContent changes
   useEffect(() => {
-    // Check if the browser supports speech synthesis
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      speechSynthRef.current = new SpeechSynthesisUtterance();
-      speechSynthRef.current.lang = language;
-      speechSynthRef.current.rate = 1;
-      speechSynthRef.current.pitch = 1;
+    if (ttsContent) {
+      const words = ttsContent.split(" ");
+      const textChunks: string[] = [];
 
-      // Add event listeners
-      speechSynthRef.current.onend = () => {
-        setIsActive(false);
-        setIsSpeaking(false);
+      for (let i = 0; i < words.length; i += 30) {
+        textChunks.push(words.slice(i, i + 30).join(" "));
+      }
+
+      setChunks(textChunks);
+      setCurrentChunkIndex(0);
+    }
+  }, [ttsContent]);
+
+  // Set up speech end detection
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleSpeechEnd = () => {
+        if (isPlayingRef.current) {
+          playNextChunk();
+        }
       };
 
-      speechSynthRef.current.onerror = () => {
-        setIsActive(false);
-        setIsSpeaking(false);
+      window.speechSynthesis?.addEventListener("end", handleSpeechEnd);
+
+      return () => {
+        window.speechSynthesis?.removeEventListener("end", handleSpeechEnd);
       };
     }
+  }, [chunks, currentChunkIndex]);
 
-    // Cleanup function
-    return () => {
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-    };
-  }, [language]);
+  // Play the next chunk if available
+  const playNextChunk = () => {
+    const nextIndex = currentChunkIndex + 1;
 
-  // Function to get text content from the page
-  const getTextToRead = () => {
-    if (typeof document !== "undefined") {
-      const contentElement = document.querySelector(contentSelector);
-      if (contentElement) {
-        // Get all text nodes and exclude hidden elements
-        return contentElement.textContent || "";
-      }
+    if (nextIndex < chunks.length) {
+      setCurrentChunkIndex(nextIndex);
+      // Use a slight timeout to ensure proper speech synthesis reset
+      setTimeout(() => {
+        startSpeaking(chunks[nextIndex]);
+      }, 100);
+    } else {
+      // We've reached the end of all chunks
+      isPlayingRef.current = false;
+      stopSpeaking();
+      setCurrentChunkIndex(0);
     }
-    return "No content found to read.";
   };
 
-  // Handle button click
   const handleClick = () => {
     if (onClick) {
       onClick();
     }
 
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      if (isSpeaking) {
-        window.speechSynthesis.cancel();
-        setIsActive(false);
-        setIsSpeaking(false);
-      } else {
-        if (speechSynthRef.current) {
-          const textToRead = getTextToRead();
-
-          speechSynthRef.current.text = textToRead;
-
-          window.speechSynthesis.cancel();
-          window.speechSynthesis.speak(speechSynthRef.current);
-
-          setIsActive(true);
-          setIsSpeaking(true);
-        }
-      }
+    if (isSpeaking) {
+      isPlayingRef.current = false;
+      stopSpeaking();
+      setCurrentChunkIndex(0);
     } else {
-      alert("Your browser does not support text-to-speech functionality.");
+      if (chunks.length > 0) {
+        isPlayingRef.current = true;
+        startSpeaking(chunks[currentChunkIndex]);
+      }
     }
   };
 
@@ -96,12 +89,12 @@ export default function AudioButton({
     <button
       onClick={handleClick}
       className={`flex items-center gap-2 px-4 py-2 rounded-md ${
-        isActive ? "bg-amber-600 text-white" : "bg-amber-100 text-gray-800"
+        isSpeaking ? "bg-amber-600 text-white" : "bg-amber-100 text-gray-800"
       }`}
-      aria-pressed={isActive}
-      title={isActive ? "Stop speaking" : "Start speaking"}
+      aria-pressed={isSpeaking}
+      title={isSpeaking ? "Stop speaking" : "Start speaking"}
     >
-      {isActive ? (
+      {isSpeaking ? (
         <VolumeX className="w-8 h-8" />
       ) : (
         <Volume2 className="w-8 h-8" />

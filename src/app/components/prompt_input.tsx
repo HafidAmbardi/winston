@@ -1,12 +1,12 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import AudioButton from "@/app/components/audio_button";
 import TextButton from "@/app/components/text_button";
 import StudyPlanButton from "@/app/components/study_plan_button";
+import { useRouter, usePathname } from "next/navigation";
 
 interface PromptInputProps {
   title?: string;
@@ -15,7 +15,7 @@ interface PromptInputProps {
   initialValue?: string;
   onSubmit?: (prompt: string) => void;
   onOptionChange?: (option: "audio" | "text" | "study" | null) => void;
-  showButtons?: boolean; // New prop to control button visibility
+  showButtons?: boolean;
 }
 
 export default function PromptInput({
@@ -25,12 +25,15 @@ export default function PromptInput({
   initialValue = "",
   onSubmit = (prompt) => console.log("Submitted prompt:", prompt),
   onOptionChange,
-  showButtons = true, // Default to showing buttons
+  showButtons = true,
 }: PromptInputProps) {
   const [prompt, setPrompt] = useState(initialValue);
   const [activeButton, setActiveButton] = useState<
     "audio" | "text" | "study" | null
-  >(null);
+  >("text"); // Default to text mode
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Update prompt if initialValue changes (e.g., from parent component)
   useEffect(() => {
@@ -39,8 +42,18 @@ export default function PromptInput({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (prompt.trim()) {
+    if (!prompt.trim()) return;
+
+    // If we're already on the winston-ai page, just submit the prompt
+    if (pathname === "/winston-ai") {
       onSubmit(prompt);
+    } else {
+      // Otherwise, navigate to winston-ai with the prompt as query parameter
+      router.push(
+        `/winston-ai?prompt=${encodeURIComponent(prompt)}&mode=${
+          activeButton || "text"
+        }`
+      );
     }
   };
 

@@ -31,7 +31,7 @@ export default function WinstonHeader({
         <div className="flex items-center gap-2 ml-2 px-3 py-1.5 rounded-full border border-[#e8e0d5]">
           <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200">
             <Image
-              src="/placeholder.svg?height=32&width=32"
+              src="/avatar.webp"
               alt="User avatar"
               width={32}
               height={32}
