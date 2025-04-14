@@ -22,6 +22,17 @@ function SubjectCard({
   onClick = () => {},
   className,
 }: SubjectCardProps) {
+  // Split title into multiple lines if it's too long
+  let firstLine = title;
+  let secondLine = titleSecondLine;
+
+  if (!titleSecondLine && title.length > 20) {
+    const words = title.split(" ");
+    const midpoint = Math.ceil(words.length / 2);
+    firstLine = words.slice(0, midpoint).join(" ");
+    secondLine = words.slice(midpoint).join(" ");
+  }
+
   return (
     <div
       className={cn(
@@ -41,10 +52,10 @@ function SubjectCard({
         </div>
         <div className="flex-1 pl-3 flex flex-col justify-between">
           <div>
-            <h2 className="text-base font-bold leading-tight">{title}</h2>
-            {titleSecondLine && (
+            <h2 className="text-base font-bold leading-tight">{firstLine}</h2>
+            {secondLine && (
               <h2 className="text-base font-bold leading-tight">
-                {titleSecondLine}
+                {secondLine}
               </h2>
             )}
           </div>
@@ -68,7 +79,7 @@ interface MathTopicsProps {
   className?: string;
 }
 
-export default function MathTopicCard({
+export default function TopicCard({
   title = "Matematika Dasar",
   cards = [],
   className,

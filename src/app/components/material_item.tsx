@@ -3,7 +3,12 @@
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-export type MaterialStatus = "completed" | "in-progress" | "on-hold";
+// Update to match what's in Firestore
+export type MaterialStatus =
+  | "completed"
+  | "in_progress"
+  | "not_started"
+  | "on_hold";
 
 interface MaterialItemProps {
   title: string;
@@ -18,26 +23,38 @@ export default function MaterialItem({
   imageSrc,
   onVisit,
 }: MaterialItemProps) {
-  // Status badge styling
+  // Status badge styling - update keys to match Firestore values
   const statusConfig = {
     completed: {
       text: "Completed",
       bgColor: "bg-green-200",
       textColor: "text-green-800",
     },
-    "in-progress": {
+    in_progress: {
       text: "In Progress",
       bgColor: "bg-purple-200",
       textColor: "text-purple-800",
     },
-    "on-hold": {
+    not_started: {
+      text: "Not Started",
+      bgColor: "bg-gray-200",
+      textColor: "text-gray-800",
+    },
+    on_hold: {
       text: "On Hold",
       bgColor: "bg-amber-100",
       textColor: "text-amber-800",
     },
   };
 
-  const { text, bgColor, textColor } = statusConfig[status];
+  // Add fallback for unknown status values
+  const statusData = statusConfig[status] || {
+    text: status.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+    bgColor: "bg-gray-200",
+    textColor: "text-gray-800",
+  };
+
+  const { text, bgColor, textColor } = statusData;
 
   return (
     <div className="bg-amber-50 rounded-xl p-4 mb-4 flex">

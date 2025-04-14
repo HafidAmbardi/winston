@@ -1,92 +1,116 @@
 "use client";
 
-import { useState } from "react";
-import { useAuth } from "@/app/context/auth_context";
-import { seedUserData } from "@/app/firebase/seed_data";
+import { useEffect, useState } from "react";
+import { seedContentData, seedUserData } from "../firebase/seed_data";
+import { useAuth } from "../context/auth_context";
 
-export default function AdminPage() {
+export default function AdminSeeder() {
   const { user } = useAuth();
-  const [userId, setUserId] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
+  const [contentSeeded, setContentSeeded] = useState(false);
+  const [userSeeded, setUserSeeded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSeedData = async () => {
-    if (!userId.trim()) {
-      setResult({ success: false, message: "Please enter a user ID" });
-      return;
-    }
-
-    setLoading(true);
+  const handleSeedContent = async () => {
+    setIsLoading(true);
+    setError(null);
     try {
-      await seedUserData(userId);
-      setResult({ success: true, message: "Data seeded successfully!" });
-    } catch (error) {
-      console.error("Seeding failed:", error);
-      setResult({
-        success: false,
-        message: `Failed to seed data: ${
-          error instanceof Error ? error.message : String(error)
-        }`,
-      });
+      const result = await seedContentData();
+      setContentSeeded(result);
+      if (!result) {
+        setError("Failed to seed content data");
+      }
+    } catch (err) {
+      setError(
+        `Error seeding content: ${
+          err instanceof Error ? err.message : String(err)
+        }`
+      );
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  if (!user) {
-    return <div className="p-8">Please log in to access admin features</div>;
-  }
+  const handleSeedUserData = async () => {
+    if (!user) {
+      setError("You must be logged in to seed user data");
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await seedUserData(user.uid);
+      setUserSeeded(result);
+      if (!result) {
+        setError("Failed to seed user data");
+      }
+    } catch (err) {
+      setError(
+        `Error seeding user data: ${
+          err instanceof Error ? err.message : String(err)
+        }`
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="p-8 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Admin Tools</h1>
+    <div className="p-6 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Admin Data Seeder</h1>
 
-      <div className="bg-white p-6 rounded-xl shadow-sm">
-        <h2 className="text-xl font-semibold mb-4">Seed Test Data</h2>
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
 
-        <div className="space-y-4">
-          <div>
-            <label className="block mb-1">User ID</label>
-            <input
-              type="text"
-              value={userId}
-              onChange={(e) => setUserId(e.target.value)}
-              className="w-full p-2 border rounded"
-              placeholder="Enter user ID to seed data for"
-            />
-            <p className="text-sm text-gray-500 mt-1">
-              Enter the Firebase UID of the user you want to create test data
-              for.
-              {user && (
-                <span>
-                  {" "}
-                  You can use your own ID: <code>{user.uid}</code>
-                </span>
-              )}
-            </p>
-          </div>
-
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="p-4 border rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">Global Content Data</h2>
+          <p className="mb-4">
+            Seed global collections like materials, quizzes, readings, etc.
+          </p>
           <button
-            onClick={handleSeedData}
-            disabled={loading}
-            className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+            onClick={handleSeedContent}
+            disabled={isLoading}
+            className={`px-4 py-2 rounded-md ${
+              contentSeeded
+                ? "bg-green-500 text-white"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            } disabled:opacity-50`}
           >
-            {loading ? "Seeding..." : "Seed Test Data"}
+            {isLoading
+              ? "Seeding..."
+              : contentSeeded
+              ? "✓ Content Seeded"
+              : "Seed Content Data"}
           </button>
+        </div>
 
-          {result && (
-            <div
-              className={`p-3 rounded ${
-                result.success
-                  ? "bg-green-100 text-green-800"
-                  : "bg-red-100 text-red-800"
-              }`}
-            >
-              {result.message}
-            </div>
+        <div className="p-4 border rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">User Data</h2>
+          <p className="mb-4">Seed demo data for the current user.</p>
+          <button
+            onClick={handleSeedUserData}
+            disabled={isLoading || !user}
+            className={`px-4 py-2 rounded-md ${
+              userSeeded
+                ? "bg-green-500 text-white"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            } disabled:opacity-50`}
+          >
+            {isLoading
+              ? "Seeding..."
+              : userSeeded
+              ? "✓ User Data Seeded"
+              : "Seed User Data"}
+          </button>
+          {!user && (
+            <p className="text-sm text-red-500 mt-2">
+              You must be logged in to seed user data
+            </p>
           )}
         </div>
       </div>

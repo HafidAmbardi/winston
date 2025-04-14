@@ -13,6 +13,7 @@ import {
   HelpCircle,
   Settings,
   LogOut,
+  BookCheck,
 } from "lucide-react";
 
 export default function WinstonSidebar() {
@@ -37,6 +38,8 @@ export default function WinstonSidebar() {
       setActiveItem("berpikir-kritis");
     } else if (pathname.startsWith("/referensi")) {
       setActiveItem("referensi-materi");
+    } else if (pathname.startsWith("/bookmarks")) {
+      setActiveItem("bookmarks");
     } else if (pathname.startsWith("/help")) {
       setActiveItem("help");
     } else if (pathname.startsWith("/settings")) {
@@ -68,7 +71,7 @@ export default function WinstonSidebar() {
           <p className="text-sm font-medium mb-2">Menu</p>
           <nav className="space-y-1">
             <Link
-              href="/"
+              href="/dashboard"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "home"
                   ? "bg-[#e09422] text-white"
@@ -141,7 +144,7 @@ export default function WinstonSidebar() {
             </Link>
 
             <Link
-              href="#"
+              href="/menulis"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
                 activeItem === "menulis"
                   ? "bg-[#e09422] text-white"
@@ -185,6 +188,18 @@ export default function WinstonSidebar() {
         <div className="p-4">
           <p className="text-sm font-medium mb-2">General</p>
           <nav className="space-y-1">
+            <Link
+              href="/bookmarks"
+              className={`flex items-center gap-3 px-3 py-2 rounded-md ${
+                activeItem === "bookmarks"
+                  ? "bg-[#e09422] text-white"
+                  : "text-gray-600 hover:bg-[#f0e6d9]"
+              }`}
+              onClick={() => setActiveItem("bookmarks")}
+            >
+              <BookCheck className="w-5 h-5" />
+              <span>Bookmark</span>
+            </Link>
             <Link
               href="#"
               className={`flex items-center gap-3 px-3 py-2 rounded-md ${
