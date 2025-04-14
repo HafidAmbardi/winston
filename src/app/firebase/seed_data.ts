@@ -74,7 +74,7 @@ export async function seedContentData() {
         category: "writing",
         difficulty: "beginner",
         title: "Pengantar Menulis Kreatif",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 34.99,
         materials: ["detailed_writing1"],
       },
@@ -83,7 +83,7 @@ export async function seedContentData() {
         category: "writing",
         difficulty: "intermediate",
         title: "Teknik Menulis Artikel Ilmiah",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 54.99,
         materials: ["detailed_writing2"],
       },
@@ -107,7 +107,7 @@ export async function seedContentData() {
         category: "mathematics", // Category matches the "matematika" route
         difficulty: "beginner",
         title: "Bilangan & Operasi Dasar",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 19.99,
         quizzes: [
           { quizId: "quiz1", marks: 10 },
@@ -119,7 +119,7 @@ export async function seedContentData() {
         category: "mathematics",
         difficulty: "intermediate",
         title: "Pecahan & Desimal",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 24.99,
         quizzes: [
           { quizId: "quiz2", marks: 20 },
@@ -131,7 +131,7 @@ export async function seedContentData() {
         category: "mathematics",
         difficulty: "intermediate",
         title: "Aljabar Dasar",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 29.99,
         quizzes: [
           { quizId: "quiz3", marks: 25 },
@@ -143,7 +143,7 @@ export async function seedContentData() {
         category: "geometry", // Different category for variety
         difficulty: "advanced",
         title: "Geometri Dimensi Dua",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 34.99,
         quizzes: [
           { quizId: "quiz4", marks: 30 },
@@ -156,7 +156,7 @@ export async function seedContentData() {
         category: "reading", // For "membaca" route
         difficulty: "beginner",
         title: "Teknik Membaca Efektif",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 29.99,
         quizzes: [{ quizId: "quiz6", marks: 15 }],
       },
@@ -166,7 +166,7 @@ export async function seedContentData() {
         category: "writing", // For "menulis" route
         difficulty: "intermediate",
         title: "Menulis Esai Argumentatif",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         price: 34.99,
         quizzes: [{ quizId: "quiz7", marks: 20 }],
       },
@@ -185,7 +185,7 @@ export async function seedContentData() {
         difficulty: "beginner",
         instruction: "Pilih jawaban yang benar untuk soal aritmetika berikut",
         text: "Jika 2 + 3 = 5, maka 5 + 8 = ?",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         answer: "13",
       },
       {
@@ -194,7 +194,7 @@ export async function seedContentData() {
         difficulty: "beginner",
         instruction: "Selesaikan persamaan berikut",
         text: "7 × 6 = ?",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         answer: "42",
       },
       {
@@ -203,7 +203,7 @@ export async function seedContentData() {
         difficulty: "intermediate",
         instruction: "Cari hasil dari operasi pecahan berikut",
         text: "1/4 + 2/4 = ?",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         answer: "3/4",
       },
       {
@@ -212,7 +212,7 @@ export async function seedContentData() {
         difficulty: "intermediate",
         instruction: "Selesaikan persamaan aljabar berikut",
         text: "Jika 2x + 5 = 13, maka nilai x = ?",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         answer: "4",
       },
       {
@@ -221,7 +221,7 @@ export async function seedContentData() {
         difficulty: "advanced",
         instruction: "Hitung luas segitiga berikut",
         text: "Segitiga dengan alas 6 cm dan tinggi 8 cm memiliki luas = ?",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         answer: "24 cm²",
       },
     ];
@@ -239,7 +239,7 @@ export async function seedContentData() {
         difficulty: "beginner",
         title: "Konsep Dasar Bilangan",
         text: "Bilangan adalah konsep matematika yang digunakan untuk menghitung dan mengukur. Bilangan terdiri dari angka-angka yang disusun menurut aturan tertentu.",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         explanation_title: "Jenis-jenis Bilangan",
         explanation:
           "Bilangan dibagi menjadi beberapa jenis, antara lain: bilangan bulat, bilangan pecahan, bilangan desimal, bilangan negatif, dan bilangan irasional.",
@@ -250,7 +250,7 @@ export async function seedContentData() {
         difficulty: "intermediate",
         title: "Memahami Pecahan",
         text: "Pecahan adalah bilangan yang menggambarkan bagian dari keseluruhan. Pecahan terdiri dari pembilang dan penyebut.",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         explanation_title: "Operasi pada Pecahan",
         explanation:
           "Operasi pada pecahan meliputi penjumlahan, pengurangan, perkalian, dan pembagian. Dalam melakukan operasi pada pecahan, kita perlu memperhatikan penyebut dan menyamakan penyebut jika diperlukan.",
@@ -261,7 +261,7 @@ export async function seedContentData() {
         difficulty: "intermediate",
         title: "Pengantar Aljabar",
         text: "Aljabar adalah cabang matematika yang mempelajari simbol dan aturan untuk memanipulasi simbol-simbol tersebut. Aljabar memungkinkan kita untuk merumuskan persamaan dan memecahkan masalah matematika.",
-        image_path: "/placeholder.svg?height=128&width=128",
+        image_path: "/reading2.png",
         explanation_title: "Variabel dan Konstanta",
         explanation:
           "Dalam aljabar, variabel adalah simbol yang mewakili nilai yang tidak diketahui, sedangkan konstanta adalah nilai tetap. Contoh variabel adalah x, y, z, sedangkan contoh konstanta adalah 1, 2, 3.",
