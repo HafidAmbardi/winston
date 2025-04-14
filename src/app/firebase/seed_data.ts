@@ -106,7 +106,7 @@ export async function seedContentData() {
     const materials = [
       {
         id: "material1",
-        category: "mathematics",
+        category: "mathematics", // Category matches the "matematika" route
         difficulty: "beginner",
         title: "Bilangan & Operasi Dasar",
         image_path: "/placeholder.svg?height=128&width=128",
@@ -142,7 +142,7 @@ export async function seedContentData() {
       },
       {
         id: "material4",
-        category: "geometry",
+        category: "geometry", // Different category for variety
         difficulty: "advanced",
         title: "Geometri Dimensi Dua",
         image_path: "/placeholder.svg?height=128&width=128",
@@ -151,6 +151,26 @@ export async function seedContentData() {
           { quizId: "quiz4", marks: 30 },
           { quizId: "quiz5", marks: 25 },
         ],
+      },
+      // Add some reading materials
+      {
+        id: "material5",
+        category: "reading", // For "membaca" route
+        difficulty: "beginner",
+        title: "Teknik Membaca Efektif",
+        image_path: "/placeholder.svg?height=128&width=128",
+        price: 29.99,
+        quizzes: [{ quizId: "quiz6", marks: 15 }],
+      },
+      // Add writing materials
+      {
+        id: "material6",
+        category: "writing", // For "menulis" route
+        difficulty: "intermediate",
+        title: "Menulis Esai Argumentatif",
+        image_path: "/placeholder.svg?height=128&width=128",
+        price: 34.99,
+        quizzes: [{ quizId: "quiz7", marks: 20 }],
       },
     ];
 

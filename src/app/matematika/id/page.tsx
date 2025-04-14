@@ -304,7 +304,7 @@ export default function DynamicMaterialPage() {
                 {/* Continue Button */}
                 <div className="mt-8">
                   <button className="w-full bg-[#A36800] hover:bg-amber-700 text-white py-3 rounded-lg flex items-center justify-center gap-2">
-                    <span>Lanjutkan</span>
+                    <span>Selesai</span>
                     <ArrowRight className="w-5 h-5" />
                   </button>
                 </div>

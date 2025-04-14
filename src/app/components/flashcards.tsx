@@ -1,28 +1,71 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Flag } from "lucide-react";
+import { Flag, Star } from "lucide-react";
+import { doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
+import { db } from "@/app/firebase/config";
+import { useAuth } from "@/app/context/auth_context";
+import { Timestamp } from "firebase/firestore";
+import { toast } from "react-hot-toast";
 
 interface FlashCardProps {
+  id?: string; // ID of the quiz or flashcard
   questionNumber: string;
   marks: number;
   question: string;
   latexExpression?: string;
-  imageUrl?: string; // Add image URL prop
+  imageUrl?: string;
+  answer?: string;
+  category?: string;
+  parentTitle?: string;
+  isBookmarkable?: boolean;
 }
 
 export default function FlashCard({
+  id = `flashcard-${Math.random().toString(36).substring(2)}`,
   questionNumber,
   marks,
   question,
   latexExpression,
-  imageUrl = "/math-placeholder.png", // Default image if none provided
+  imageUrl = "/math-placeholder.png",
+  answer,
+  category = "mathematics",
+  parentTitle = "Practice Flashcards",
+  isBookmarkable = true,
 }: FlashCardProps) {
+  const { user } = useAuth();
   const [showAnswer, setShowAnswer] = useState(false);
   const [userAnswer, setUserAnswer] = useState<
     "correct" | "incorrect" | "flagged" | null
   >(null);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // Store original ID to avoid re-generation on re-renders
+  const stableId = useRef(id);
+
+  // Generate a consistent bookmark ID
+  const bookmarkId = id.startsWith("flashcard-")
+    ? id
+    : `flashcard-${stableId.current}`;
+
+  // Check if this flashcard is already bookmarked when the component mounts
+  useEffect(() => {
+    const checkBookmarkStatus = async () => {
+      if (!user || !isBookmarkable) return;
+
+      try {
+        const bookmarkRef = doc(db, `users/${user.uid}/bookmarks`, bookmarkId);
+        const bookmarkDoc = await getDoc(bookmarkRef);
+        setIsBookmarked(bookmarkDoc.exists());
+      } catch (error) {
+        console.error("Error checking bookmark status:", error);
+      }
+    };
+
+    checkBookmarkStatus();
+  }, [user, bookmarkId, isBookmarkable]);
 
   const handleViewAnswer = () => {
     setShowAnswer(!showAnswer);
@@ -34,6 +77,57 @@ export default function FlashCard({
     setUserAnswer(answer);
   };
 
+  const handleBookmarkToggle = async () => {
+    if (!user) {
+      toast.error("Please login to save flashcards");
+      return;
+    }
+
+    if (loading) return;
+
+    setLoading(true);
+    try {
+      const bookmarkRef = doc(db, `users/${user.uid}/bookmarks`, bookmarkId);
+      const bookmarkDoc = await getDoc(bookmarkRef);
+      const currentlyBookmarked = bookmarkDoc.exists();
+
+      if (currentlyBookmarked) {
+        // Remove bookmark
+        await deleteDoc(bookmarkRef);
+        toast.success("Flashcard removed from saved items");
+        setIsBookmarked(false);
+      } else {
+        // Add bookmark
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        await setDoc(bookmarkRef, {
+          id: bookmarkId,
+          type: "flashcard",
+          title: question,
+          materialType: "flashcard",
+          parentTitle: parentTitle,
+          summaryPoints: [latexExpression || ""],
+          detailedExplanation: answer || "",
+          createdAt: Timestamp.now(),
+          // SRS fields
+          reviewCount: 1,
+          lastReviewedDate: Timestamp.now(),
+          nextReviewDate: Timestamp.fromDate(tomorrow),
+          srsStatus: "new",
+        });
+        toast.success("Flashcard saved for later review");
+        setIsBookmarked(true);
+      }
+    } catch (error) {
+      console.error("Error toggling bookmark:", error);
+      toast.error("Failed to update saved items");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full p-4 bg-[#FEF1D5] border border-gray-500 rounded-lg shadow-sm">
       <div className="flex justify-between items-center">
@@ -43,6 +137,29 @@ export default function FlashCard({
           </div>
         </div>
         <div className="flex items-center gap-2 text-black font-medium">
+          {isBookmarkable && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!loading) handleBookmarkToggle();
+              }}
+              disabled={loading}
+              aria-label={
+                isBookmarked ? "Remove from saved items" : "Save for later"
+              }
+              className={`p-1 rounded-full hover:bg-amber-100 transition-colors ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              <Star
+                className={`w-5 h-5 ${
+                  isBookmarked
+                    ? "fill-yellow-400 text-yellow-400"
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+              />
+            </button>
+          )}
           <Flag size={20} />
           <span>{marks} marks</span>
         </div>
@@ -124,8 +241,8 @@ export default function FlashCard({
         <div className="mt-4 p-4 bg-white rounded-md">
           <h3 className="font-medium text-lg mb-2">Jawaban:</h3>
           <div className="text-gray-800">
-            {latexExpression === "∫ x² dx" ? (
-              <p className="font-mono">x³/3 + C</p>
+            {answer ? (
+              <p className="font-mono">{answer}</p>
             ) : (
               <p>Jawaban tidak tersedia</p>
             )}

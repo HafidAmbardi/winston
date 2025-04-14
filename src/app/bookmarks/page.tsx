@@ -214,24 +214,6 @@ export default function BookmarksPage() {
                   </button>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  <AudioButton
-                    isActive={activeOption === "audio"}
-                    onClick={handleAudioSelect}
-                  />
-
-                  <TextButton
-                    isActive={activeOption === "text"}
-                    onClick={handleTextSelect}
-                  />
-
-                  <StudyPlanButton
-                    isActive={activeOption === "study"}
-                    onClick={handleStudyPlanSelect}
-                  />
-                </div>
-
                 {/* Loading State */}
                 {loading && (
                   <div className="p-6 text-center">
@@ -324,7 +306,7 @@ export default function BookmarksPage() {
                 )}
 
                 {activeContent === "flashcard" && (
-                  <div className="mb-8">
+                  <div className="mb-8 space-y-8">
                     {filteredBookmarks.length === 0 ? (
                       <p>Tidak ada flashcard yang disimpan</p>
                     ) : (
@@ -341,17 +323,20 @@ export default function BookmarksPage() {
                           />
 
                           <FlashCard
-                            questionNumber={bookmark.id}
+                            id={bookmark.id.replace("flashcard-", "")}
+                            questionNumber={bookmark.id.substr(-4)} // Use last 4 chars of ID as question number
                             marks={5}
                             question={bookmark.title}
-                            latexExpression={bookmark.detailedExplanation || ""}
+                            latexExpression={bookmark.summaryPoints?.[0] || ""}
+                            answer={bookmark.detailedExplanation}
+                            parentTitle={bookmark.parentTitle}
+                            isBookmarkable={false} // Don't show bookmark button for already bookmarked items
                           />
                         </div>
                       ))
                     )}
                   </div>
                 )}
-
                 {activeContent === "winston" && (
                   <div className="space-y-4">
                     {filteredBookmarks.length === 0 ? (
