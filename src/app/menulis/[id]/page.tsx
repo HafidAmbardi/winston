@@ -27,7 +27,7 @@ const defaultQuizzes = [
 ];
 
 interface ReadingData {
-  id: string;
+  id?: string; // Make id optional since we'll set it from docId
   title: string;
   category: string;
   difficulty: string;
@@ -38,17 +38,35 @@ interface ReadingData {
   relatedMaterials?: string[];
 }
 
+// Define a type for recommended courses
+interface RecommendedCourse {
+  id: string;
+  title: string;
+  imageSrc: string;
+  isFavorite: boolean;
+  collection?: string;
+}
+
+// Type for the material data from Firestore
+interface MaterialData {
+  title?: string;
+  image_path?: string;
+}
+
 export default function DynamicReadingPage() {
   const params = useParams();
   const readingId = params?.id as string;
 
+  // We'll keep searchQuery but use it for filtering or highlighting later
   const [searchQuery, setSearchQuery] = useState("");
   const [activeOption, setActiveOption] = useState<"audio" | "text" | null>(
     null
   );
   const [loading, setLoading] = useState(true);
   const [readingData, setReadingData] = useState<ReadingData | null>(null);
-  const [recommendedCourses, setRecommendedCourses] = useState<any[]>([]);
+  const [recommendedCourses, setRecommendedCourses] = useState<
+    RecommendedCourse[]
+  >([]);
   const [relatedQuizzes, setRelatedQuizzes] = useState(defaultQuizzes);
 
   // Fetch reading data
@@ -70,10 +88,11 @@ export default function DynamicReadingPage() {
         const readingSnap = await getDoc(readingRef);
 
         if (readingSnap.exists()) {
-          const data = readingSnap.data() as ReadingData;
+          const data = readingSnap.data() as Omit<ReadingData, "id">;
+          // Set reading data with id from document ID
           setReadingData({
-            id: readingSnap.id,
             ...data,
+            id: readingSnap.id, // This now comes after the spread to avoid overwriting
           });
 
           // If the reading has related materials, fetch them for recommendations
@@ -95,14 +114,18 @@ export default function DynamicReadingPage() {
                   const materialSnap = await getDoc(materialRef);
 
                   if (materialSnap.exists()) {
-                    return {
+                    const materialData = materialSnap.data() as MaterialData;
+
+                    // Create a properly typed RecommendedCourse object
+                    const course: RecommendedCourse = {
                       id: materialSnap.id,
-                      title: materialSnap.data().title || "Untitled",
-                      imageSrc:
-                        materialSnap.data().image_path || "/placeholder.svg",
+                      title: materialData.title || "Untitled",
+                      imageSrc: materialData.image_path || "/placeholder.svg",
                       isFavorite: false,
-                      collection,
+                      collection, // This is optional in RecommendedCourse
                     };
+
+                    return course;
                   }
                 }
                 return null;
@@ -112,7 +135,14 @@ export default function DynamicReadingPage() {
             const resolvedMaterials = await Promise.all(
               relatedMaterialPromises
             );
-            setRecommendedCourses(resolvedMaterials.filter(Boolean));
+
+            // Filter out null values and ensure type safety
+            const filteredMaterials: RecommendedCourse[] =
+              resolvedMaterials.filter(
+                (item): item is RecommendedCourse => item !== null
+              );
+
+            setRecommendedCourses(filteredMaterials);
           } else {
             // Default recommendations if no related materials
             setRecommendedCourses([
@@ -151,11 +181,13 @@ export default function DynamicReadingPage() {
     fetchReadingData();
   }, [readingId]);
 
-  // Rest of your component remains the same...
   // Handle prompt submission
   const handlePromptSubmit = (prompt: string) => {
     setSearchQuery(prompt);
     console.log("Searching for:", prompt);
+
+    // You can use searchQuery for filtering or highlighting
+    // Example: if (searchQuery) { highlightText(searchQuery); }
   };
 
   // Handle read full text

@@ -22,7 +22,6 @@ export default function PremiumCourseMaterial({
   title,
   imageSrc,
   isFavorite = false,
-  onToggleFavorite = () => {},
   onReadFullText,
   onAudioSelect = () => {},
   onTextSelect = () => {},
@@ -68,15 +67,13 @@ export default function PremiumCourseMaterial({
             <AudioButton
               isActive={false}
               onClick={onAudioSelect}
-              label="Dengar"
-              compact={true}
+              text="Dengar" // Changed from label to text
             />
 
             <TextButton
               isActive={false}
               onClick={onTextSelect}
-              label="Ringkasan"
-              compact={true}
+              text="Ringkasan" // Changed from label to text
             />
           </div>
 
