@@ -1,47 +1,44 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import WinstonSidebar from "@/app/components/sidebar"
-import WinstonHeader from "@/app/components/header"
-import MaterialSection from "@/app/components/material_section"
-import PromptInput from "@/app/components/prompt_input"
-import RegularCourseMaterial from "@/app/components/regular_course_material"
+import { useRouter } from "next/navigation";
+import WinstonSidebar from "@/app/components/sidebar";
+import WinstonHeader from "@/app/components/header";
+import MaterialSection from "@/app/components/material_section";
+import PromptInput from "@/app/components/prompt_input";
+import RegularCourseMaterial from "@/app/components/regular_course_material";
 
 interface ProblemSolvingStep {
-  id: number
-  title: string
-  description: string
-  example: string
+  id: number;
+  title: string;
+  description: string;
+  example: string;
 }
 
 interface RecommendedCourse {
-  id: string
-  title: string
-  imageSrc: string
+  id: string;
+  title: string;
+  imageSrc: string;
 }
 
 export default function ProblemSolvingPage() {
-  const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState<string>("")
+  const router = useRouter();
 
   const handlePromptSubmit = (prompt: string) => {
-    setSearchQuery(prompt)
-    console.log("Searching for:", prompt)
-  }
+    console.log("Searching for:", prompt);
+  };
 
   const handleReadFullText = (id: string) => {
-    console.log(`Reading full text for section ${id}`)
-    router.push(`/problem-solving/material?id=${id}`)
-  }
+    console.log(`Reading full text for section ${id}`);
+    router.push(`/problem-solving/material?id=${id}`);
+  };
 
   const handleAudioSelect = () => {
-    console.log("Audio option selected")
-  }
+    console.log("Audio option selected");
+  };
 
   const handleTextSelect = () => {
-    console.log("Text option selected")
-  }
+    console.log("Text option selected");
+  };
 
   const problemSolvingSteps: ProblemSolvingStep[] = [
     {
@@ -68,7 +65,7 @@ export default function ProblemSolvingPage() {
       example:
         "Solusi untuk meningkatkan engagement: 🔹 Lakukan survei cepat untuk memahami preferensi pengguna.\n🔹 Tambahkan fitur gamifikasi untuk meningkatkan interaksi.\n🔹 Optimalkan UI/UX agar lebih menarik dan intuitif.",
     },
-  ]
+  ];
 
   const recommendedCourses: RecommendedCourse[] = [
     {
@@ -86,7 +83,7 @@ export default function ProblemSolvingPage() {
       title: "Metode 5W+1H untuk Analisis Masalah",
       imageSrc: "/problem-solving-3.jpeg",
     },
-  ]
+  ];
 
   return (
     <div className="flex h-screen">
@@ -112,24 +109,16 @@ export default function ProblemSolvingPage() {
             <h1 className="text-2xl font-bold mb-6">Langkah-Langkah Pemecahan Masalah</h1>
             <div className="grid gap-6 mb-12">
               {problemSolvingSteps.map((step) => (
-             <MaterialSection
-             summaryPoints={[
-               "🔹 Tentukan masalah utama yang ingin diselesaikan.",
-               "🔹 Pastikan pemahaman yang jelas terhadap situasi yang terjadi.",
-               "🔹 Gunakan metode 5W+1H (What, Why, Who, When, Where, How) untuk menggali informasi lebih dalam.",
-             ]}
-             detailedExplanation={
-               <div>
-                 <p>
-                 Untuk menyelesaikan suatu permasalahan secara efektif, langkah pertama adalah mengidentifikasi masalah utama yang ingin diselesaikan agar solusi yang diambil benar-benar relevan dan berdampak. Pemahaman yang jelas terhadap situasi yang terjadi sangat penting agar tidak salah dalam menganalisis penyebab dan konsekuensi dari masalah tersebut. Pendekatan 5W+1H dapat digunakan untuk menggali informasi lebih dalam, yaitu dengan menjawab pertanyaan What (Apa masalahnya?), Why (Mengapa masalah ini terjadi?), Who (Siapa yang terlibat atau terdampak?), When (Kapan masalah ini muncul atau sering terjadi?), Where (Di mana masalah ini terjadi?), dan How (Bagaimana masalah ini bisa terjadi atau bagaimana cara mengatasinya?). Dengan menjawab pertanyaan-pertanyaan ini secara sistematis, kita dapat memperoleh gambaran yang lebih komprehensif tentang akar permasalahan serta menyusun strategi penyelesaian yang lebih efektif dan tepat sasaran.
-                 </p>
-               </div>
-             }
-             
-
-             
-             buttonText="Lihat Penjelasan Lengkap"
-           />
+                <MaterialSection
+                  key={step.id} // Added key for React list rendering
+                  summaryPoints={step.description.split("\n")} // Dynamically split description into points
+                  detailedExplanation={
+                    <div>
+                      <p>{step.example}</p>
+                    </div>
+                  }
+                  buttonText="Lihat Penjelasan Lengkap"
+                />
               ))}
             </div>
 
@@ -155,7 +144,6 @@ export default function ProblemSolvingPage() {
         </main>
       </div>
     </div>
-  )
+  );
 }
-
 
