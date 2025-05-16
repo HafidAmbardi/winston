@@ -9,6 +9,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { app } from "./config";
+import { useAuthenticatedQuery } from '@/app/hooks/useAuthenticatedQuery';
 
 // Initialize Firestore
 export const db = getFirestore(app);
@@ -25,6 +26,7 @@ export const getRecentUserResults = (userId: string, limitCount = 5) =>
     orderBy("timestamp", "desc"),
     limit(limitCount)
   );
+
 // Get a material by ID from any of the material collections
 export const getMaterialFromAnyCollection = async (materialId: string) => {
   // Collections to check in order of priority
@@ -62,6 +64,7 @@ export const getUserMaterialsStatus = async (userId: string) => {
 
   return materials;
 };
+
 export const getUserMaterials = (userId: string, limitCount = 4) =>
   query(collection(getUserDoc(userId), "userMaterials"), limit(limitCount));
 
@@ -77,7 +80,7 @@ export const getLatestFeedback = (userId: string) =>
     orderBy("createdAt", "desc"),
     limit(1)
   );
-// Add these to your existing firestore.tsx file
+
 export const getMaterials = (limitCount = 10) =>
   query(collection(db, "materials"), limit(limitCount));
 
@@ -107,3 +110,42 @@ export const getAggregatedMaterialById = (materialId: string) =>
 
 export const getReadingById = (readingId: string) =>
   doc(db, "readings", readingId);
+
+function YourComponent() {
+  const { data, error, isLoading, isAuthenticated, userId } = useAuthenticatedQuery(
+    () => getMaterials(10),
+    {
+      onError: (error) => {
+        console.error('Error fetching materials:', error);
+      }
+    }
+  );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <div>Please sign in to access this content</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h2>Error loading content</h2>
+        <p>{error.message}</p>
+        <p>User ID: {userId}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {data?.map((material) => (
+        <div key={material.id}>
+          {/* Render your material data here */}
+        </div>
+      ))}
+    </div>
+  );
+}

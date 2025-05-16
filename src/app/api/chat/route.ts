@@ -1,10 +1,4 @@
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
-
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 // Define system prompts for different modes
 const SYSTEM_PROMPTS = {
@@ -13,6 +7,20 @@ const SYSTEM_PROMPTS = {
   study:
     'You are Winston AI, an educational learning planner. Create a structured study plan based on the topic provided. The plan should be divided into 3-10 logical learning sessions (never less than 3, never more than 10). Each session should include specific learning objectives, activities, and estimated time duration. Follow this JSON structure exactly: { "title": "Study Plan: [Topic]", "sections": [ { "summaryPoints": ["Learning objective 1", "Learning objective 2", "Estimated time: X minutes/hours"], "detailedExplanation": "Detailed instructions for this study session, including specific activities, resources to use, and learning methods.", "buttonText": "Session Details" } ] }. Make the plan practical, achievable, and tailored to the specified topic. Include varied learning activities like reading, practice exercises, self-tests, and reflection.',
 };
+
+// Helper function to clean JSON string
+function cleanJsonString(jsonString: string): string {
+  // Remove markdown code block indicators
+  let cleaned = jsonString.replace(/```json\s*|\s*```/g, '');
+  
+  // Remove any leading/trailing whitespace
+  cleaned = cleaned.trim();
+  
+  // If the string starts with a newline, remove it
+  cleaned = cleaned.replace(/^\n+/, '');
+  
+  return cleaned;
+}
 
 export async function POST(request: Request) {
   try {
@@ -29,28 +37,72 @@ export async function POST(request: Request) {
     const systemPrompt =
       mode === "study" ? SYSTEM_PROMPTS.study : SYSTEM_PROMPTS.text;
 
-    // Using ChatCompletion with the selected system prompt
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      response_format: { type: "json_object" },
-      messages: [
-        {
-          role: "system",
-          content: systemPrompt,
+    // Using Gemini API with gemini-2.0-flash-lite model
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        { role: "user", content: prompt },
-      ],
-    });
+        body: JSON.stringify({
+          contents: [
+            {
+              role: "user",
+              parts: [
+                {
+                  text: `${systemPrompt}\n\nUser Query: ${prompt}\n\nPlease provide your response in the exact JSON format specified in the instructions. Do not include any markdown formatting or code block indicators.`
+                }
+              ]
+            }
+          ],
+          generationConfig: {
+            temperature: 0.7,
+            topK: 40,
+            topP: 0.95,
+            maxOutputTokens: 2048,
+          },
+          safetySettings: [
+            {
+              category: "HARM_CATEGORY_HARASSMENT",
+              threshold: "BLOCK_MEDIUM_AND_ABOVE"
+            },
+            {
+              category: "HARM_CATEGORY_HATE_SPEECH",
+              threshold: "BLOCK_MEDIUM_AND_ABOVE"
+            },
+            {
+              category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+              threshold: "BLOCK_MEDIUM_AND_ABOVE"
+            },
+            {
+              category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+              threshold: "BLOCK_MEDIUM_AND_ABOVE"
+            }
+          ]
+        })
+      }
+    );
 
-    // Extract the content from the response
-    const content = response.choices[0]?.message?.content;
-
-    if (!content) {
-      throw new Error("No content returned from OpenAI");
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Gemini API Error:', errorData);
+      throw new Error(`Gemini API error: ${response.statusText} - ${JSON.stringify(errorData)}`);
     }
 
+    const data = await response.json();
+    const content = data.candidates[0]?.content?.parts[0]?.text;
+
+    if (!content) {
+      throw new Error("No content returned from Gemini");
+    }
+
+    // Clean the JSON string before parsing
+    const cleanedContent = cleanJsonString(content);
+    console.log('Cleaned content:', cleanedContent);
+
     // Parse the JSON response
-    const structuredContent = JSON.parse(content);
+    const structuredContent = JSON.parse(cleanedContent);
 
     // Validate the number of sections (additional safeguard)
     if (
