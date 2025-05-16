@@ -1,99 +1,103 @@
-# 📖 Winston — Meningkatkan Akses Pendidikan Inklusif bagi Penyandang Disabilitas Kognitif dengan Winston
-**Solusi Berbasis AI untuk Learning Disabilities (LDs) dan Memory Disabilities (MDs)**
+# 📖 Winston — Enhancing Inclusive Education Access for Individuals with Cognitive Disabilities  
+**An AI-Powered Solution for Learning Disabilities (LDs) and Memory Disabilities (MDs)**
 
-
-## ✨ Nama Tim  
+## ✨ Team Name  
 **Thisability**
 
-## ✨ Anggota  
+## ✨ Team Members  
 - Daniel Winston Mandela Tulung  
-- Nareswari Ayu Prabowo
+- Nareswari Ayu Prabowo  
 - Hafid Sasayuda Ambardi
 
 ## ✨ Brief Explanation  
-**Winston** adalah platform **AI pertama di Indonesia** yang dirancang khusus untuk individu dengan disabilitas kognitif, menghadirkan pengalaman belajar yang personal, adaptif, dan inklusif.
+**Winston** is the **first AI-powered platform in Indonesia** designed specifically for individuals with cognitive disabilities, offering a personalized, adaptive, and inclusive learning experience.
 
-Fitur-fitur **Winston** dikembangkan secara langsung untuk mengatasi masalah dan celah yang ada dalam pendidikan, pekerjaan, dan kehidupan sehari-hari bagi individu dengan LDs & MDs:
+Winston’s features are developed to directly address the challenges in education, employment, and daily life for individuals with LDs & MDs:
 
-- **Winston AI** - **Smart Learning Companion**
-- **Winston Recall** - **Spaced Repetition System**  
-- **Winston Progress** -  **Gamified Learning Tracker**
-- **Winston Pathways** - **Adaptive Learning Journeys**  
-- **Winston Focus** - **Enhanced Accessibility Mode**
+- **Winston AI** – **Smart Learning Companion**  
+- **Winston Recall** – **Spaced Repetition System**  
+- **Winston Progress** – **Gamified Learning Tracker**  
+- **Winston Pathways** – **Adaptive Learning Journeys**  
+- **Winston Focus** – **Enhanced Accessibility Mode**
 
-Kemampuan utama Winston:  
-- Menjawab pertanyaan apapun dengan langkah-langkah jelas  
-- Secara otomatis membuat kuis & pertanyaan berbasis percakapan  
-- Menyediakan white noise untuk fokus  
-- Dashboard progres melacak pencapaian, tantangan, dan kemajuan pengguna  
-- Pre-assessment untuk menentukan kebutuhan & kemampuan pengguna  
-- Menghasilkan jawaban dalam bentuk chunks untuk memudahkan pemahaman  
-- Mendukung multimodal learning (teks, audio, visual)  
-- Roadmap otomatis berdasarkan topik yang dipilih  
-- Menggunakan pengulangan terjadwal untuk meningkatkan retensi ingatan  
-- Memotivasi pengguna dengan elemen gamifikasi  
-- Koleksi materi siap pakai yang direkomendasikan sesuai hasil pre-assessment  
-
----
-
-## ✨ Produk Akhir
-
-- 🌐 **Link Website WebApp:** [[Link WebApp]  ](https://winston-five.vercel.app/)
+### Winston's Core Capabilities:
+- Answers any question with step-by-step guidance  
+- Automatically generates quizzes and questions from conversation  
+- Provides white noise for better focus  
+- Progress dashboard to track achievements, challenges, and milestones  
+- Pre-assessment to personalize content and understand user abilities  
+- Chunk-based answers to simplify complex ideas  
+- Supports multimodal learning (text, audio, visual)  
+- Automatically generates topic-based learning roadmaps  
+- Uses spaced repetition to boost memory retention  
+- Motivates users with gamified elements  
+- Provides curated materials based on pre-assessment results
 
 ---
 
-## ✨ Video Demo  
-🎥 **Video demo (3 menit):** [Link Video Demo]
+## ✨ Final Product
+
+🌐 **WebApp Link:** [Visit WebApp](https://winston-five.vercel.app/)
+
+---
+
+## ✨ Demo Video  
+🎥 **Demo Video (3 minutes):** [Link to Demo Video]
 
 ---
 
 ## ✨ Tech Stack
-This project uses the following technologies and frameworks:
-- **Frontend**: [Next.js](https://nextjs.org) (React Framework)
-- **Backend**: [Firebase](https://firebase.google.com) (Authentication, Firestore)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com)
-- **Icons**: [Lucide React](https://lucide.dev)
+This project is built using the following technologies:
+- **Frontend**: [Next.js](https://nextjs.org) (React Framework)  
+- **Backend**: [Firebase](https://firebase.google.com) (Authentication, Firestore)  
+- **Styling**: [Tailwind CSS](https://tailwindcss.com)  
+- **Icons**: [Lucide React](https://lucide.dev)  
 - **Programming Language**: TypeScript
 
 ---
 
 ## 📂 Project Structure
+## 📂 Project Structure
 
-```
 winston/
-├── .next/                  # Folder hasil build (dihasilkan oleh Next.js)
-├── node_modules/           # Dependency project (hasil install npm/yarn)
-├── public/                 # Static assets (gambar, icon, dll)
-├── src/                    # Source code utama
-│   ├── app/                # Logic aplikasi dan halaman-halaman
-│   │   ├── admin/          # Halaman & logic untuk admin panel
-│   │   ├── api/            # API routes & handler
-│   │   ├── auth/           # Halaman otentikasi (login, signup)
-│   │   ├── components/     # Komponen UI yang bisa dipakai ulang
-│   │   ├── context/        # Global React context provider
-│   │   ├── dashboard/      # Halaman dashboard untuk tracking progress melalui Winston Progress
-│   │   ├── firebase/       # Konfigurasi & inisialisasi Firebase
-│   │   ├── informasi/      # Halaman untuk info-info umum
-│   │   ├── lib/            # Utility atau helper library
-│   │   ├── matematika/     # Halaman seputar matematika
-│   │   ├── membaca/        # Halaman seputar membaca
-│   │   ├── winston-ai/     # Fitur Winston AI yang dipakai di app
-│   │   ├── favicon.ico     # Favicon aplikasi
-│   │   ├── globals.css     # File CSS global untuk styling
-│   │   ├── layout.tsx      # Komponen layout utama (root layout)
-│   │   └── page.tsx        # Halaman entry point utama aplikasi
-│   ├── lib/                # Utility functions eksternal
-├── .env.local              # Environment variables lokal (API keys)
-├── .gitignore              # File & folder yang di-ignore Git
-├── components.json         # Config JSON untuk komponen (kalau dipakai)
-├── eslint.config.mjs       # Konfigurasi ESLint untuk code linting
-├── firestore.rules         # Rules keamanan untuk Firestore
-├── next-env.d.ts           # Deklarasi environment Next.js untuk TypeScript
-├── next.config.ts          # Konfigurasi Next.js
-├── package-lock.json       # Lock versi dependencies biar konsisten
-└── package.json            # Daftar dependencies & script project
-```
+├── .next/ # Build output (generated by Next.js)
+├── node_modules/ # Project dependencies
+├── public/ # Static assets (images, icons, etc.)
+├── src/ # Main source code
+│ ├── app/ # App logic and main pages
+│ │ ├── admin/ # Admin panel pages and logic
+│ │ ├── api/ # API routes and handlers
+│ │ ├── auth/ # Authentication pages (login, signup)
+│ │ ├── components/ # Reusable UI components
+│ │ ├── context/ # Global React context provider
+│ │ ├── dashboard/ # Progress tracking pages via Winston Progress
+│ │ ├── firebase/ # Firebase config & initialization
+│ │ ├── informasi/ # General information pages
+│ │ ├── lib/ # Utilities or helper functions
+│ │ ├── matematika/ # Math-focused pages
+│ │ ├── membaca/ # Reading-focused pages
+│ │ ├── winston-ai/ # Winston AI features
+│ │ ├── favicon.ico # App favicon
+│ │ ├── globals.css # Global CSS styling
+│ │ ├── layout.tsx # Main app layout
+│ │ └── page.tsx # Main entry point of the application
+│ ├── lib/ # External utility functions
+├── .env.local # Local environment variables (API keys)
+├── .gitignore # Git ignore rules
+├── components.json # Component configuration (if used)
+├── eslint.config.mjs # ESLint configuration
+├── firestore.rules # Firestore security rules
+├── next-env.d.ts # Next.js TypeScript environment declarations
+├── next.config.ts # Next.js configuration
+├── package-lock.json # Dependency version lock
+└── package.json # Project dependencies & scripts
 
-## ✨ Catatan  
-> README ini disusun untuk kebutuhan **LDS** dan **MDS**.  
-> Link pengumpulan akan disampaikan sesuai timeline yang ditetapkan.
+yaml
+Copy
+Edit
+
+---
+
+## ✨ Notes  
+> This README was created for submission under the **Learning Disabilities (LDs)** and **Memory Disabilities (MDs)** category.  
+> The submission link will be provided based on the timeline.
